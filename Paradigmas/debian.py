@@ -29,14 +29,14 @@ class LinuxKernel:
         # Inicializa o kernel do Linux.
         print("Inicializando o Kernel Linux", end='')
         Loading_animation(1)
-        print(f"Kernel Linux {self.version} inicializado com sucesso.\n")
+        print(f"Kernel Linux {self.version} inicializado com sucesso.")
         time.sleep(2)
 
     def shutdown(self):
         # Desliga o kernel do Linux.
         print("Desligando o Kernel Linux", end='')
         Loading_animation(1)
-        print(f"Kernel Linux {self.version} desligado.\n")
+        print(f"Kernel Linux {self.version} desligado.")
         time.sleep(2)
 
 
@@ -114,7 +114,7 @@ class ApplicationInterface:
     
 class Application:
     # Classe que representa um aplicativo instalado.
-    def __init__(self, name, version):
+    def __init__(self, name):
         # Inicializa um aplicativo com um nome e versão.
         self.name = name
         self.version = round(random.uniform(1.0, 12.0), 1)  # Versão aleatória entre 1.0 e 12.0
@@ -163,14 +163,16 @@ class LinuxOperatingSystem:
         # Faça uma série de prints que simule a instalação do Debian.
         print(f"Instalando distribuição {name}", end='')
         Loading_animation(3)
+        for repository in self.repositories:
+            repository.download()
         time.sleep(3)
 
     def start_system(self):
         # Inicia o sistema Linux.
         print("Ligando o Sistema Linux", end='')
         Loading_animation(1)
-        self.kernel.shutdown()
-        print("Sistema Linux ligado.\n")
+        self.kernel.initialize()
+        print("Sistema Linux ligado.")
         time.sleep(2)
 
 
@@ -179,7 +181,7 @@ class LinuxOperatingSystem:
         print("Desligando o Sistema Linux", end='')
         Loading_animation(1)
         self.kernel.shutdown()
-        print("Sistema Linux desligado.\n")
+        print("Sistema Linux desligado.")
         time.sleep(2)
 
 
@@ -196,14 +198,14 @@ class Repository:
         print(f"Baixando pacotes de {self.address}", end='')
         Loading_animation(1)
         time.sleep(3)
-        print("Pacotes baixados.\n")
+        print("Pacotes baixados.")
 
     def upload(self):
         # Faz upload de pacotes para o repositório.
         print(f"Enviando pacotes para {self.address}", end='')
         Loading_animation(1)
         time.sleep(1)
-        print("Pacotes enviados.\n")
+        print("Pacotes enviados.")
 
 
 class Package:
@@ -259,14 +261,59 @@ class Machine:
         # Executa o aplicativo especificado na máquina.
         self.application_interface.start_application(application)
 
-
-def main():
-    linux_os = LinuxOperatingSystem("Debian")
-
-
-
-    linux_os.shutdown_system()
-
-
 if __name__ == "__main__":
-    main()
+    # Inicialização do Sistema Operacional Linux
+    linux_os = LinuxOperatingSystem("Debian 12")
+    linux_os.install_distro("Debian")
+    linux_os.start_system()
+
+    # Interagindo com o kernel do Linux
+    kernel_api = LinuxKernelAPI()
+    kernel_api.interact_with_kernel()
+
+    # Gerenciando dispositivos de hardware
+    device_controller = DeviceController()
+    device_controller.manage_hardware()
+
+    # Verificando a saúde dos componentes de hardware
+    system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
+    system_hardware.check_health()
+
+    # Monitorando o uso da CPU
+    system_hardware.monitor_cpu_usage()
+
+    # Gerenciando recursos de memória
+    system_hardware.manage_memory()
+
+    # Executando aplicativos na máquina
+    app_name = "MyApp"
+    installed_app = Application(app_name)
+    machine = Machine("Virtual", "VMWare Virtual Machine")
+    machine.execute_application(installed_app)
+
+    # Gerenciando permissões de aplicativos
+    app_interface = ApplicationInterface()
+    app_interface.manage_permissions(installed_app)
+
+    # Definindo arquitetura de software
+    software_architecture = SoftwareArchitecture("Monolithic", "Description")
+    software_architecture.define_components()
+    software_architecture.define_integrations()
+
+    # Gerenciando repositórios de software
+    repo_address = "http://example.com/repo"
+    repo_name = "Main Repository"
+    repository = Repository(repo_address, repo_name)
+    repository.download()
+    repository.upload()
+
+    # Fornecendo serviços a outras máquinas na rede
+    server = Server("Web Server", "192.168.1.1")
+    server.initialize()
+
+    # Adicionando máquinas ao servidor
+    server_machine = Machine("Physical", "Dell Server")
+    server.add_machine(server_machine)
+
+    # Desligando o Sistema Operacional Linux
+    linux_os.shutdown_system()
