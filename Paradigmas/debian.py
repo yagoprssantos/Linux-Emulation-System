@@ -1,3 +1,32 @@
+"""
+? ADICONAR INTERAÇÃO COM KERNEL
+
+* Loading_animation
+* LinuxKernel
+! LinuxKernelAPI
+TODO: Fazer com que o kernel seja usado todas as vezes que necessário
+TODO: (acessar hardware, executar sudo, coisas que afetam diretamente o sistema)
+? Hardware
+* ApplicationInterface + MELHORAR PERMISSÕES
+* Application
+* SoftwareArchitecture
+! LinuxOperatingSystem MELHORAR
+? Repository
+? Package
+TODO: juntar Repository e Package para executarem juntos
+* Server
+* Machine
+
+
+TODO MAIN: Fazer prints na ordem certa!
+1. Instalar Linux
+2. Iniciar o Linux
+3. Aparecer Menu Interativo 
+(DeviceController, Hardware, App,
+Info(Software Architecture, Machine, Server), Sair do Linux)
+4. Finalizar Linux
+"""
+
 import random
 import time
 import sys
@@ -42,21 +71,10 @@ class LinuxKernel:
 
 class LinuxKernelAPI:
     # Classe que fornece uma interface estável para os programas interagirem com o kernel do Linux.
-    def interact_with_kernel(self):
-        # Interage com o kernel do Linux.
+    def interact_with_kernel(self): 
         print("Interagindo com o kernel do Linux", end='')
         Loading_animation(1)
         time.sleep(1)
-
-
-class DeviceController:
-    # Classe que gerencia dispositivos de hardware específicos.
-    def manage_hardware(self):
-        # Gerencia dispositivos de hardware.
-        print("Gerenciando dispositivos de hardware", end='')
-        Loading_animation(1)
-        time.sleep(1)
-
 
 class Hardware:
     # Classe que representa os componentes de hardware de uma máquina.
@@ -70,14 +88,16 @@ class Hardware:
         # Verifica o estado de saúde dos componentes de hardware.
         print("Verificando integridade dos componentes de hardware", end='')
         Loading_animation(1)
-        time.sleep(1)
-        print("Saúde do hardware: ótima")
+        LinuxKernelAPI.interact_with_kernel()
+        health_list = ["Péssimo", "Ruim", "Ok", "Bom", "Ótimo"] 
+        print(f"Saúde do hardware: {random.choice(health_list)}!")
         time.sleep(1)
 
     def monitor_cpu_usage(self):
         # Monitora o uso da CPU.
         print("Monitorando o uso da CPU", end='')
         Loading_animation(1)
+        LinuxKernelAPI.interact_with_kernel()
         cpu_usage = random.randint(10, 90)  # Simula o uso aleatório da CPU
         print(f"Uso da CPU: {cpu_usage}%")
         time.sleep(1)
@@ -86,8 +106,7 @@ class Hardware:
         # Gerencia os recursos de memória.
         print("Gerenciando os recursos de memória", end='')
         Loading_animation(1)
-        time.sleep(1)
-
+        LinuxKernelAPI.interact_with_kernel()
 
 class ApplicationInterface:
     # Classe que gerencia a execução e permissões de aplicativos.
@@ -95,10 +114,13 @@ class ApplicationInterface:
         # Inicializa a interface do aplicativo.
         self.applications_list = []
 
+    def add_application(self, application):
+        # Adiciona um aplicativo à lista de aplicativos disponíveis.
+        self.applications_list.append(application)
+
     def start_application(self, application):
         # Inicia o aplicativo especificado.
-        print(f"Iniciando {application.name} versão {application.version}", end='')
-        Loading_animation(1)
+        Application.execute(application)
         time.sleep(2)
         print(f"{application.name} iniciado e pronto para uso.")
 
@@ -124,8 +146,6 @@ class Application:
         print(f"Executando {self.name}; Versão: {self.version}", end='')
         Loading_animation(1)
         time.sleep(2)
-        print(f"{self.name} executado.")
-
 
 
 class SoftwareArchitecture:
@@ -261,59 +281,26 @@ class Machine:
         # Executa o aplicativo especificado na máquina.
         self.application_interface.start_application(application)
 
+class ComputerController:
+    def __init__(self):
+        self.linux_os = LinuxOperatingSystem("Debian 12")
+        self.kernel_api = LinuxKernelAPI()
+        self.system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
+        self.app_name = "MyApp"
+        self.installed_app = Application(self.app_name)
+        self.app_interface = ApplicationInterface()
+        self.software_architecture = SoftwareArchitecture("Monolithic", "Description")
+        self.repo_address = "http://example.com/repo"
+        self.repo_name = "Main Repository"
+        self.repository = Repository(self.repo_address, self.repo_name)
+        self.server = Server("Web Server", "192.168.1.1")
+        self.server_machine = Machine("Physical", "Dell Server")
+
+    def run(self):
+        pass
+
 if __name__ == "__main__":
-    # Inicialização do Sistema Operacional Linux
-    linux_os = LinuxOperatingSystem("Debian 12")
-    linux_os.install_distro("Debian")
-    linux_os.start_system()
+    ComputerController()
 
-    # Interagindo com o kernel do Linux
-    kernel_api = LinuxKernelAPI()
-    kernel_api.interact_with_kernel()
 
-    # Gerenciando dispositivos de hardware
-    device_controller = DeviceController()
-    device_controller.manage_hardware()
 
-    # Verificando a saúde dos componentes de hardware
-    system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
-    system_hardware.check_health()
-
-    # Monitorando o uso da CPU
-    system_hardware.monitor_cpu_usage()
-
-    # Gerenciando recursos de memória
-    system_hardware.manage_memory()
-
-    # Executando aplicativos na máquina
-    app_name = "MyApp"
-    installed_app = Application(app_name)
-    machine = Machine("Virtual", "VMWare Virtual Machine")
-    machine.execute_application(installed_app)
-
-    # Gerenciando permissões de aplicativos
-    app_interface = ApplicationInterface()
-    app_interface.manage_permissions(installed_app)
-
-    # Definindo arquitetura de software
-    software_architecture = SoftwareArchitecture("Monolithic", "Description")
-    software_architecture.define_components()
-    software_architecture.define_integrations()
-
-    # Gerenciando repositórios de software
-    repo_address = "http://example.com/repo"
-    repo_name = "Main Repository"
-    repository = Repository(repo_address, repo_name)
-    repository.download()
-    repository.upload()
-
-    # Fornecendo serviços a outras máquinas na rede
-    server = Server("Web Server", "192.168.1.1")
-    server.initialize()
-
-    # Adicionando máquinas ao servidor
-    server_machine = Machine("Physical", "Dell Server")
-    server.add_machine(server_machine)
-
-    # Desligando o Sistema Operacional Linux
-    linux_os.shutdown_system()
