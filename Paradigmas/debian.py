@@ -1,6 +1,7 @@
 import random
 import time
 import sys
+import os
 
 # Função meramente ilustrativa para imitar o loading
 def Loading_animation(repeat_times):
@@ -311,7 +312,6 @@ class Machine:
         self.system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
 
 
-
 class LinuxOperatingSystem:
     # Classe que coordena e gerencia todas as operações do sistema.
     def __init__(self, version):
@@ -346,24 +346,94 @@ class LinuxOperatingSystem:
         print("Sistema Linux desligado.")
         time.sleep(2)
 
-
 class ComputerController:
     def __init__(self):
-        # Complete
-        pass
+        # Criação dos repositórios e pacotes padrão
+        self.create_default_repositories()
 
     def run(self):
-        # Complete
-        pass
+        # Inicialização do Sistema Operacional Linux
+        linux_system = LinuxOperatingSystem("Debian 12")
+        linux_system.install_distro("Debian")
+        linux_system.start_system()
 
-    def create_default_repositories():
+        # Interação com o kernel do Linux
+        kernel_api = LinuxKernelAPI()
+        kernel_api.interact_with_kernel()
 
-        # Cria por padrão 3 repositórios com pacotes fictícios.
+        # Inicialização dos menus
+        while True:
+            choice = self.menu_principal()
+            if choice == 1:
+                self.menu_hardware()
+            elif choice == 2:
+                self.menu_app()
+            elif choice == 3:
+                self.menu_repo()
+            elif choice == 4:
+                self.menu_info()
+            elif choice == 5:
+                os.system('clear')
+                linux_system.shutdown_system()
+                break
+
+    def menu_principal(self):
+        os.system('clear')
+        print("\nMenu Principal:")
+        print("1. Analisar Hardware")
+        print("2. Aplicativos")
+        print("3. Repositórios")
+        print("4. Informações")
+        print("5. Sair do Linux")
+        return int(input("Escolha uma opção: "))
+
+    def menu_hardware(self):
+        os.system('clear')
+        print("\nMenu de Hardware:")
+        print("1. Analisar Saúde")
+        print("2. Uso da CPU")
+        print("3. Memória")
+        print("4. Voltar para menu principal")
+        choice = int(input("Escolha uma opção: "))
+        # Implemente as opções do menu de hardware aqui
+
+    def menu_app(self):
+        os.system('clear')
+        print("\nMenu de Aplicativos:")
+        print("1. Listar aplicativos instalados")
+        print("2. Instalar aplicativos")
+        print("3. Iniciar aplicativo")
+        print("4. Permissões do aplicativo")
+        print("5. Voltar para menu principal")
+        choice = int(input("Escolha uma opção: "))
+        # Implemente as opções do menu de aplicativos aqui
+
+    def menu_repo(self):
+        os.system('clear')
+        print("\nMenu de Repositórios:")
+        print("1. Listar repositórios (e seus pacotes)")
+        print("2. Pacotes existentes")
+        print("3. Voltar para menu principal")
+        choice = int(input("Escolha uma opção: "))
+        # Implemente as opções do menu de repositórios aqui
+
+    def menu_info(self):
+        os.system('clear')
+        print("\nMenu de Informações:")
+        print("1. Máquina (Listar informações da máquina)")
+        print("2. Servidor (Listar informações do servidor)")
+        print("3. Arquitetura de Software (Listar informações da arquitetura de software)")
+        print("4. Voltar para menu principal")
+        choice = int(input("Escolha uma opção: "))
+        # Implemente as opções do menu de informações aqui
+
+    def create_default_repositories(self):
+        # Criação dos repositórios padrão com pacotes fictícios
         debian_repo1 = Repository("http://debian-repo1.com", "Debian Repository 1")
         debian_repo2 = Repository("http://debian-repo2.com", "Debian Repository 2")
         debian_repo3 = Repository("http://debian-repo3.com", "Debian Repository 3")
 
-        # Gera pacotes fictícios e os adiciona aos repositórios
+        # Geração de pacotes fictícios e adição aos repositórios
         for _ in range(5):
             debian_repo1.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
             debian_repo2.repo_pack_list.append(Package(f"Package-{random.randint(101, 200)}", "2.0"))
@@ -372,6 +442,3 @@ class ComputerController:
 
 if __name__ == "__main__":
     ComputerController().run()
-
-
-
