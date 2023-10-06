@@ -1,32 +1,3 @@
-"""
-? ADICONAR INTERAÇÃO COM KERNEL
-
-* Loading_animation
-* LinuxKernel
-! LinuxKernelAPI
-TODO: Fazer com que o kernel seja usado todas as vezes que necessário
-TODO: (acessar hardware, executar sudo, coisas que afetam diretamente o sistema)
-? Hardware
-* ApplicationInterface + MELHORAR PERMISSÕES
-* Application
-* SoftwareArchitecture
-! LinuxOperatingSystem MELHORAR
-? Repository
-? Package
-TODO: juntar Repository e Package para executarem juntos
-* Server
-* Machine
-
-
-TODO MAIN: Fazer prints na ordem certa!
-1. Instalar Linux
-2. Iniciar o Linux
-3. Aparecer Menu Interativo 
-(DeviceController, Hardware, App,
-Info(Software Architecture, Machine, Server), Sair do Linux)
-4. Finalizar Linux
-"""
-
 import random
 import time
 import sys
@@ -76,6 +47,7 @@ class LinuxKernelAPI:
         Loading_animation(1)
         time.sleep(1)
 
+
 class Hardware:
     # Classe que representa os componentes de hardware de uma máquina.
     def __init__(self, cpu, memory, storage):
@@ -107,33 +79,18 @@ class Hardware:
         print("Gerenciando os recursos de memória", end='')
         Loading_animation(1)
         LinuxKernelAPI.interact_with_kernel()
-
-class ApplicationInterface:
-    # Classe que gerencia a execução e permissões de aplicativos.
-    def __init__(self):
-        # Inicializa a interface do aplicativo.
-        self.applications_list = []
-
-    def add_application(self, application):
-        # Adiciona um aplicativo à lista de aplicativos disponíveis.
-        self.applications_list.append(application)
-
-    def start_application(self, application):
-        # Inicia o aplicativo especificado.
-        Application.execute(application)
-        time.sleep(2)
-        print(f"{application.name} iniciado e pronto para uso.")
-
-    def manage_permissions(self, application):
-        # Gerencia permissões para o aplicativo especificado.
-        print(f"Gerenciando permissões para {application.name}", end='')
+        
+        # Simula a alocação e liberação de memória para um processo fictício
+        allocated_memory = random.randint(1, 16)  # em GB
+        print(f"Alocando {allocated_memory}GB de memória para um processo fictício.")
+        Loading_animation(2)
+        time.sleep(1)
+        
+        print(f"Liberando {allocated_memory}GB de memória após o término do processo.")
         Loading_animation(1)
-        time.sleep(1) 
-        permissions = ["Leitura", "Escrita", "Execução"]
-        print(f"Permissões disponíveis: {', '.join(permissions)}")
         time.sleep(1)
 
-    
+
 class Application:
     # Classe que representa um aplicativo instalado.
     def __init__(self, name):
@@ -147,6 +104,74 @@ class Application:
         Loading_animation(1)
         time.sleep(2)
 
+    def get_name(self):
+        # Retorna o nome do aplicativo.
+        return self.name
+
+
+class ApplicationInterface:
+    # Classe que gerencia a execução e permissões de aplicativos.
+    def __init__(self):
+        # Inicializa a interface do aplicativo.
+        self.applications_list = []
+
+    def add_application(self, application):
+        # Adiciona um aplicativo à lista de aplicativos disponíveis.
+        self.applications_list.append(application)
+
+    def start_application(self):
+        # Pergunta ao usuário qual aplicativo ele deseja abrir.
+        while True:
+            print("Aplicativos disponíveis:")
+            for app in self.applications_list:
+                print(app.get_name())
+
+            app_name = input("Digite o nome do aplicativo que deseja abrir: ")
+
+            # Verifica se o aplicativo existe na lista de aplicativos.
+            selected_app = None
+            for app in self.applications_list:
+                if app.get_name().lower() == app_name.lower():
+                    selected_app = app
+                    break
+
+            if selected_app:
+                LinuxKernelAPI.interact_with_kernel()
+                selected_app.execute()
+                print(f"{selected_app.name} iniciado e pronto para uso.")
+                break
+            else:
+                print(f"O aplicativo '{app_name}' não foi encontrado. Por favor, tente novamente.")
+                continue
+
+    def manage_permissions(self):
+        # Pergunta ao usuário qual aplicativo ele deseja gerenciar permissões.
+        while True:
+            print("Aplicativos disponíveis:")
+            for app in self.applications_list:
+                print(app.get_name())
+
+            app_name = input("Digite o nome do aplicativo para gerenciar permissões: ")
+
+            # Verifica se o aplicativo existe na lista de aplicativos.
+            selected_app = None
+            for app in self.applications_list:
+                if app.get_name().lower() == app_name.lower():
+                    selected_app = app
+                    break
+
+            if selected_app:
+                print(f"Gerenciando permissões para {selected_app.name}", end='')
+                Loading_animation(1)
+                time.sleep(1) 
+                permissions = ["Leitura", "Escrita", "Execução"]
+                print(f"Permissões disponíveis: {', '.join(permissions)}")
+                time.sleep(1)
+                break
+            else:
+                print(f"O aplicativo '{app_name}' não foi encontrado. Por favor, tente novamente.")
+                continue
+
 
 class SoftwareArchitecture:
     # Classe que define a estrutura e integrações dos componentes de software.
@@ -155,54 +180,33 @@ class SoftwareArchitecture:
         self.software_type = software_type
         self.description = description
         self.components = []
+        self.integrations = []
 
     def define_components(self):
         # Define os componentes de software.
         print("Definindo componentes de software", end='')
         Loading_animation(1)
+        # Adicionando componentes fictícios à lista
+        self.components.append("Módulo de Autenticação")
+        self.components.append("Serviço de Banco de Dados")
+        self.components.append("Biblioteca de Criptografia")
+        print("Componentes definidos:")
+        for component in self.components:
+            print(f"- {component}")
         time.sleep(1)
 
     def define_integrations(self):
         # Define integrações de software.
         print("Definindo integrações de software", end='')
         Loading_animation(1)
+        # Adicionando integrações fictícias à lista
+        self.integrations.append("API REST para Comunicação entre Módulos")
+        self.integrations.append("Barramento de Serviço para Integração de Aplicações")
+        self.integrations.append("Middleware de Mensageria para Troca de Mensagens")
+        print("Integrações definidas:")
+        for integration in self.integrations:
+            print(f"- {integration}")
         time.sleep(1)
-
-
-class LinuxOperatingSystem:
-    # Classe que coordena e gerencia todas as operações do sistema.
-    def __init__(self, version):
-        # Inicializa o sistema operacional Linux com uma versão específica.
-        self.version = version
-        self.kernel = LinuxKernel("4.0")
-        self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
-        self.repositories = []
-
-    def install_distro(self, name):
-        # Instala a distribuição Linux.
-        # Faça uma série de prints que simule a instalação do Debian.
-        print(f"Instalando distribuição {name}", end='')
-        Loading_animation(3)
-        for repository in self.repositories:
-            repository.download()
-        time.sleep(3)
-
-    def start_system(self):
-        # Inicia o sistema Linux.
-        print("Ligando o Sistema Linux", end='')
-        Loading_animation(1)
-        self.kernel.initialize()
-        print("Sistema Linux ligado.")
-        time.sleep(2)
-
-
-    def shutdown_system(self):
-        # Desliga o sistema Linux.
-        print("Desligando o Sistema Linux", end='')
-        Loading_animation(1)
-        self.kernel.shutdown()
-        print("Sistema Linux desligado.")
-        time.sleep(2)
 
 
 class Repository:
@@ -211,7 +215,7 @@ class Repository:
         # Inicializa o repositório com um endereço e nome específicos.
         self.address = address
         self.name = name
-        self.packages = []
+        self.repo_pack_list = []
 
     def download(self):
         # Baixa pacotes do repositório.
@@ -220,13 +224,27 @@ class Repository:
         time.sleep(3)
         print("Pacotes baixados.")
 
-    def upload(self):
-        # Faz upload de pacotes para o repositório.
-        print(f"Enviando pacotes para {self.address}", end='')
-        Loading_animation(1)
-        time.sleep(1)
-        print("Pacotes enviados.")
+    def list_packages(self):
+        # Lista os pacotes disponíveis no repositório.
+        print(f"Pacotes no repositório {self.name}:")
+        for package in self.repo_pack_list:
+            print(f"- {package.name} (Versão {package.version})")
 
+    def install_package(self, package_name):
+        # Instala um pacote pelo nome, se existir no repositório.
+        package = next((p for p in self.repo_pack_list if p.name == package_name), None)
+        if package:
+            package.install()
+        else:
+            print(f"Pacote '{package_name}' não encontrado no repositório {self.name}.")
+
+    def uninstall_package(self, package_name):
+        # Desinstala um pacote pelo nome, se existir e estiver instalado.
+        package = next((p for p in self.repo_pack_list if p.name == package_name), None)
+        if package:
+            package.uninstall()
+        else:
+            print(f"Pacote '{package_name}' não encontrado no repositório {self.name}.")
 
 class Package:
     # Classe que representa um pacote de software instalável.
@@ -234,13 +252,29 @@ class Package:
         # Inicializa um pacote de software com um nome e versão.
         self.name = name
         self.version = version
+        self.installed = False  # Estado de instalação
 
     def install(self):
         # Instala o pacote de software.
-        print(f"Instalando {self.name}; Versão {self.version}", end='')
-        Loading_animation(1)
-        time.sleep(2)
-        print(f"Pacote '{self.name}' instalado.")
+        if not self.installed:
+            print(f"Instalando {self.name}; Versão {self.version}", end='')
+            Loading_animation(1)
+            time.sleep(2)
+            self.installed = True
+            print(f"Pacote '{self.name}' instalado.")
+        else:
+            print(f"Pacote '{self.name}' já está instalado.")
+
+    def uninstall(self):
+        # Desinstala o pacote de software.
+        if self.installed:
+            print(f"Desinstalando {self.name}; Versão {self.version}", end='')
+            Loading_animation(1)
+            time.sleep(2)
+            self.installed = False
+            print(f"Pacote '{self.name}' desinstalado.")
+        else:
+            print(f"Pacote '{self.name}' não está instalado.")
 
 
 class Server:
@@ -274,33 +308,70 @@ class Machine:
         # Inicializa uma máquina com um tipo e descrição específicos.
         self.machine_type = machine_type
         self.description = description
-        self.application_interface = ApplicationInterface()
         self.system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
 
-    def execute_application(self, application):
-        # Executa o aplicativo especificado na máquina.
-        self.application_interface.start_application(application)
+
+
+class LinuxOperatingSystem:
+    # Classe que coordena e gerencia todas as operações do sistema.
+    def __init__(self, version):
+        # Inicializa o sistema operacional Linux com uma versão específica.
+        self.version = version
+        self.kernel = LinuxKernel("4.0")
+        self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
+        self.repositories = []
+
+    def install_distro(self, name):
+        # Instala a distribuição Linux.
+        # Faça uma série de prints que simule a instalação do Debian.
+        print(f"Instalando distribuição {name}", end='')
+        Loading_animation(3)
+        for repository in self.repositories:
+            repository.download()
+        time.sleep(3)
+
+    def start_system(self):
+        # Inicia o sistema Linux.
+        print("Ligando o Sistema Linux", end='')
+        Loading_animation(1)
+        self.kernel.initialize()
+        print("Sistema Linux ligado.")
+        time.sleep(2)
+
+    def shutdown_system(self):
+        # Desliga o sistema Linux.
+        print("Desligando o Sistema Linux", end='')
+        Loading_animation(1)
+        self.kernel.shutdown()
+        print("Sistema Linux desligado.")
+        time.sleep(2)
+
 
 class ComputerController:
     def __init__(self):
-        self.linux_os = LinuxOperatingSystem("Debian 12")
-        self.kernel_api = LinuxKernelAPI()
-        self.system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")
-        self.app_name = "MyApp"
-        self.installed_app = Application(self.app_name)
-        self.app_interface = ApplicationInterface()
-        self.software_architecture = SoftwareArchitecture("Monolithic", "Description")
-        self.repo_address = "http://example.com/repo"
-        self.repo_name = "Main Repository"
-        self.repository = Repository(self.repo_address, self.repo_name)
-        self.server = Server("Web Server", "192.168.1.1")
-        self.server_machine = Machine("Physical", "Dell Server")
-
-    def run(self):
+        # Complete
         pass
 
+    def run(self):
+        # Complete
+        pass
+
+    def create_default_repositories():
+
+        # Cria por padrão 3 repositórios com pacotes fictícios.
+        debian_repo1 = Repository("http://debian-repo1.com", "Debian Repository 1")
+        debian_repo2 = Repository("http://debian-repo2.com", "Debian Repository 2")
+        debian_repo3 = Repository("http://debian-repo3.com", "Debian Repository 3")
+
+        # Gera pacotes fictícios e os adiciona aos repositórios
+        for _ in range(5):
+            debian_repo1.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
+            debian_repo2.repo_pack_list.append(Package(f"Package-{random.randint(101, 200)}", "2.0"))
+            debian_repo3.repo_pack_list.append(Package(f"Package-{random.randint(201, 300)}", "3.0"))
+
+
 if __name__ == "__main__":
-    ComputerController()
+    ComputerController().run()
 
 
 
