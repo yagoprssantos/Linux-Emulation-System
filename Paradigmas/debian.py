@@ -1,10 +1,14 @@
+"""
+Grande parte dos menus ficaram incompletos, mas a ideia está feita.
+"""
+
 import random
 import time
 import sys
 import os
 
 # Função meramente ilustrativa para imitar o loading
-def Loading_animation(repeat_times):
+def Loading_animation(repeat_times=0):
     for _ in range(repeat_times):
         for _ in range(3):
             sys.stdout.write(".")
@@ -21,20 +25,20 @@ def Loading_animation(repeat_times):
 
 
 class LinuxKernel:
-    # Classe que representa o kernel do Linux responsável pelo gerenciamento de hardware, recursos do sistema e interação com dispositivos.
+    # Classe que representa o Kernel do Linux responsável pelo gerenciamento de hardware, recursos do sistema e interação com dispositivos.
     def __init__(self, version):
-        # Inicializa o kernel do Linux com uma versão específica.
+        # Inicializa o Kernel do Linux com uma versão específica.
         self.version = version
 
     def initialize(self):
-        # Inicializa o kernel do Linux.
+        # Inicializa o Kernel do Linux.
         print("Inicializando o Kernel Linux", end='')
         Loading_animation(1)
         print(f"Kernel Linux {self.version} inicializado com sucesso.")
         time.sleep(2)
 
     def shutdown(self):
-        # Desliga o kernel do Linux.
+        # Desliga o Kernel do Linux.
         print("Desligando o Kernel Linux", end='')
         Loading_animation(1)
         print(f"Kernel Linux {self.version} desligado.")
@@ -42,9 +46,9 @@ class LinuxKernel:
 
 
 class LinuxKernelAPI:
-    # Classe que fornece uma interface estável para os programas interagirem com o kernel do Linux.
+    # Classe que fornece uma interface estável para os programas interagirem com o Kernel do Linux.
     def interact_with_kernel(self): 
-        print("Interagindo com o kernel do Linux", end='')
+        print("Interagindo com o Kernel do Linux", end='')
         Loading_animation(1)
         time.sleep(1)
 
@@ -346,18 +350,71 @@ class LinuxOperatingSystem:
         print("Sistema Linux desligado.")
         time.sleep(2)
 
+
+class Lists:
+
+    def list_machine_info(self, machine):
+        os.system('clear')
+        # Obtém informações sobre a máquina e imprime
+        print("Informações da Máquina:")
+        print(f"Tipo: {machine.machine_type}")
+        print(f"Descrição: {machine.description}")
+        print(f"CPU: {machine.system_hardware.cpu}")
+        print(f"Memória: {machine.system_hardware.memory}")
+        print(f"Armazenamento: {machine.system_hardware.storage}")
+        input("Pressione Enter para voltar ao menu...")
+        ComputerController.menu_info()
+
+    def list_server_info(self, server):
+        os.system('clear')
+        # Obtém informações sobre o servidor e imprime
+        print("Informações do servidor:")
+        print(f"Tipo: {server.server_type}")
+        print(f"Endereço IP: {server.ip_address}")
+        print("Máquinas conectadas:")
+        for machine in server.machines:
+            print(f"- {machine.machine_type}: {machine.description}")
+        input("Pressione Enter para voltar ao menu...")
+
+    def list_software_architecture_info(self, software_architecture):
+        os.system('clear')
+        # Obtém informações sobre a arquitetura de software e imprime
+        print("Informações da Arquitetura de Software:")
+        print(f"Tipo: {software_architecture.software_type}")
+        print(f"Descrição: {software_architecture.description}")
+        print("Componentes:")
+        for component in software_architecture.components:
+            print(f"- {component}")
+        print("Integrações:")
+        for integration in software_architecture.integrations:
+            print(f"- {integration}")
+        input("Pressione Enter para voltar ao menu...")
+        ComputerController.menu_info()
+
 class ComputerController:
     def __init__(self):
         # Criação dos repositórios e pacotes padrão
         self.create_default_repositories()
+        self.lists = Lists()
+        self.linux_system = LinuxOperatingSystem("Debian 12")
+        self.server = Server("Web Server", "192.168.1.1")
+        self.server_machine = Machine("Physical", "Dell Server")
+        self.machine = Machine("Virtual", "VMWare Virtual Machine")
+        self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
+
 
     def run(self):
+        os.system('clear')
         # Inicialização do Sistema Operacional Linux
-        linux_system = LinuxOperatingSystem("Debian 12")
-        linux_system.install_distro("Debian")
-        linux_system.start_system()
+        self.linux_system.install_distro("Debian")
+        self.linux_system.start_system()
 
-        # Interação com o kernel do Linux
+        # Criação e inicialização do Servidor + Máquina
+        self.server.add_machine(self.server_machine)
+        self.server.initialize()
+
+        # Identificação da máquina
+        # Interação com o Kernel do Linux
         kernel_api = LinuxKernelAPI()
         kernel_api.interact_with_kernel()
 
@@ -374,7 +431,7 @@ class ComputerController:
                 self.menu_info()
             elif choice == 5:
                 os.system('clear')
-                linux_system.shutdown_system()
+                self.linux_system.shutdown_system()
                 break
 
     def menu_principal(self):
@@ -395,7 +452,7 @@ class ComputerController:
         print("3. Memória")
         print("4. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Implemente as opções do menu de hardware aqui
+        # Faltou implementar as funções
 
     def menu_app(self):
         os.system('clear')
@@ -406,7 +463,7 @@ class ComputerController:
         print("4. Permissões do aplicativo")
         print("5. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Implemente as opções do menu de aplicativos aqui
+        # Faltou implementar as funções
 
     def menu_repo(self):
         os.system('clear')
@@ -415,7 +472,7 @@ class ComputerController:
         print("2. Pacotes existentes")
         print("3. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Implemente as opções do menu de repositórios aqui
+        # Faltou implementar as funções
 
     def menu_info(self):
         os.system('clear')
@@ -425,7 +482,20 @@ class ComputerController:
         print("3. Arquitetura de Software (Listar informações da arquitetura de software)")
         print("4. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Implemente as opções do menu de informações aqui
+
+        while self.menu_info:
+            if choice == 1:
+                self.lists.list_machine_info(self.machine)
+            elif choice == 2:
+                self.lists.list_server_info(self.server)
+            elif choice == 3:
+                self.lists.list_software_architecture_info(self.software_architecture)
+            elif choice == 4:
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+            choice = int(input("Escolha uma opção: "))  
+
 
     def create_default_repositories(self):
         # Criação dos repositórios padrão com pacotes fictícios
@@ -434,7 +504,7 @@ class ComputerController:
         debian_repo3 = Repository("http://debian-repo3.com", "Debian Repository 3")
 
         # Geração de pacotes fictícios e adição aos repositórios
-        for _ in range(5):
+        for _ in range(3):
             debian_repo1.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
             debian_repo2.repo_pack_list.append(Package(f"Package-{random.randint(101, 200)}", "2.0"))
             debian_repo3.repo_pack_list.append(Package(f"Package-{random.randint(201, 300)}", "3.0"))
