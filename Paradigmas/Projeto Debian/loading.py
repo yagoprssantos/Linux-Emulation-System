@@ -1,8 +1,7 @@
-
 import sys, time
 
 # Função meramente ilustrativa para imitar o loading
-def Loading_animation(repeat_times=0):
+def LoadingAnimation(repeat_times=0):
     for _ in range(repeat_times):
         for _ in range(3):
             sys.stdout.write(".")

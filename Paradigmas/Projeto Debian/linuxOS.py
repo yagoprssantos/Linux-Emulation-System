@@ -1,7 +1,7 @@
 import time
-from loading import Loading_animation
-from kernelLinux import LinuxKernel
-from hardware import SoftwareArchitecture
+from loading import LoadingAnimation
+from kernel import LinuxKernel
+from architecture import SoftwareArchitecture
 
 class LinuxOperatingSystem:
     # Classe que coordena e gerencia todas as operações do sistema.
@@ -12,28 +12,28 @@ class LinuxOperatingSystem:
         self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
         self.repositories = []
 
-    def install_distro(self, name):
+    def InstallDistro(self, name):
         # Instala a distribuição Linux.
         # Faça uma série de prints que simule a instalação do Debian.
         print(f"Instalando distribuição {name}", end='')
-        Loading_animation(3)
+        LoadingAnimation(3)
         for repository in self.repositories:
-            repository.download()
+            repository.DownloadRepo()
         time.sleep(3)
 
-    def start_system(self):
+    def StartSystem(self):
         # Inicia o sistema Linux.
         print("Ligando o Sistema Linux", end='')
-        Loading_animation(1)
-        self.kernel.initialize()
+        LoadingAnimation(1)
+        self.kernel.InitializeKernel()
         print("Sistema Linux ligado.")
         time.sleep(2)
 
-    def shutdown_system(self):
+    def ShutdownSystem(self):
         # Desliga o sistema Linux.
         print("Desligando o Sistema Linux", end='')
-        Loading_animation(1)
-        self.kernel.shutdown()
+        LoadingAnimation(1)
+        self.kernel.ShutdownKernel()
         print("Sistema Linux desligado.")
         time.sleep(2)
 

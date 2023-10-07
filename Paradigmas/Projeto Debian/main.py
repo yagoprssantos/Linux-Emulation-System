@@ -1,16 +1,38 @@
 import os
-from loading import *
-from kernelLinux import *
-from hardware import *
+from appInterface import *
 from application import *
+from hardware import *
+from kernel import *
+from linuxOS import *
+from loading import *
+from machine import *
 from repository import *
 from server import *
-from linux import *
+from architecture import *
+from menu import *
 
+"""
+#!Obrigatórios
+TODO 1: Consertar Repository e Package (conflito de funções) 
 
-class Lists:
+TODO 2: Consertar todos os menus (funcionais)
 
-    def list_machine_info(self, machine):
+TODO 3: Adaptar main para rodar o código (atualizar self)
+
+TODO FINAL: Conferir se usou tudo que ele pediu para usar (herança, polimorfismo, encapsulamento)
+
+#?Bônus para melhor nota
+TODO 1: Retirar todos os IFs
+
+TODO 2: Retirar todos os GET e SET
+
+Notas:
+- 
+"""
+
+class List:
+
+    def MachineInfo(self, machine):
         os.system('clear')
         # Obtém informações sobre a máquina e imprime
         print("Informações da Máquina:")
@@ -20,9 +42,9 @@ class Lists:
         print(f"Memória: {machine.system_hardware.memory}")
         print(f"Armazenamento: {machine.system_hardware.storage}")
         input("Pressione Enter para voltar ao menu...")
-        ComputerController.menu_info()
+        ComputerController.MenuInfo()
 
-    def list_server_info(self, server):
+    def ServerInfo(self, server):
         os.system('clear')
         # Obtém informações sobre o servidor e imprime
         print("Informações do servidor:")
@@ -33,7 +55,7 @@ class Lists:
             print(f"- {machine.machine_type}: {machine.description}")
         input("Pressione Enter para voltar ao menu...")
 
-    def list_software_architecture_info(self, software_architecture):
+    def ArchitectureInfo(self, software_architecture):
         os.system('clear')
         # Obtém informações sobre a arquitetura de software e imprime
         print("Informações da Arquitetura de Software:")
@@ -46,115 +68,52 @@ class Lists:
         for integration in software_architecture.integrations:
             print(f"- {integration}")
         input("Pressione Enter para voltar ao menu...")
-        ComputerController.menu_info()
+        ComputerController.MenuInfo()
 
 class ComputerController:
     def __init__(self):
         # Criação dos repositórios e pacotes padrão
-        self.create_default_repositories()
-        self.lists = Lists()
-        self.linux_system = LinuxOperatingSystem("Debian 12")
+        self.CreateRepo()
+        self.lists = List()
+        self.linuxOS_system = LinuxOperatingSystem("Debian 12")
         self.server = Server("Web Server", "192.168.1.1")
         self.server_machine = Machine("Physical", "Dell Server")
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
 
 
-    def run(self):
+    def Run(self):
         os.system('clear')
         # Inicialização do Sistema Operacional Linux
-        self.linux_system.install_distro("Debian")
-        self.linux_system.start_system()
+        self.linuxOS_system.InstallDistro("Debian")
+        self.linuxOS_system.StartSystem()
 
         # Criação e inicialização do Servidor + Máquina
-        self.server.add_machine(self.server_machine)
-        self.server.initialize()
+        self.server.AddMachine(self.server_machine)
+        self.server.InitializeServer()
 
         # Identificação da máquina
         # Interação com o Kernel do Linux
         kernel_api = LinuxKernelAPI()
-        kernel_api.interact_with_kernel()
+        kernel_api.InteractWithKernel()
 
         # Inicialização dos menus
         while True:
-            choice = self.menu_principal()
+            choice = self.MenuPrincipal()
             if choice == 1:
-                self.menu_hardware()
+                self.MenuHardware()
             elif choice == 2:
-                self.menu_app()
+                self.MenuApp()
             elif choice == 3:
-                self.menu_repo()
+                self.MenuRepository()
             elif choice == 4:
-                self.menu_info()
+                self.MenuInfo()
             elif choice == 5:
                 os.system('clear')
-                self.linux_system.shutdown_system()
+                self.linuxOS_system.ShutdownSystem()
                 break
 
-    def menu_principal(self):
-        os.system('clear')
-        print("\nMenu Principal:")
-        print("1. Analisar Hardware")
-        print("2. Aplicativos")
-        print("3. Repositórios")
-        print("4. Informações")
-        print("5. Sair do Linux")
-        return int(input("Escolha uma opção: "))
-
-    def menu_hardware(self):
-        os.system('clear')
-        print("\nMenu de Hardware:")
-        print("1. Analisar Saúde")
-        print("2. Uso da CPU")
-        print("3. Memória")
-        print("4. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
-
-    def menu_app(self):
-        os.system('clear')
-        print("\nMenu de Aplicativos:")
-        print("1. Listar aplicativos instalados")
-        print("2. Instalar aplicativos")
-        print("3. Iniciar aplicativo")
-        print("4. Permissões do aplicativo")
-        print("5. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
-
-    def menu_repo(self):
-        os.system('clear')
-        print("\nMenu de Repositórios:")
-        print("1. Listar repositórios (e seus pacotes)")
-        print("2. Pacotes existentes")
-        print("3. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
-
-    def menu_info(self):
-        os.system('clear')
-        print("\nMenu de Informações:")
-        print("1. Máquina (Listar informações da máquina)")
-        print("2. Servidor (Listar informações do servidor)")
-        print("3. Arquitetura de Software (Listar informações da arquitetura de software)")
-        print("4. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-
-        while self.menu_info:
-            if choice == 1:
-                self.lists.list_machine_info(self.machine)
-            elif choice == 2:
-                self.lists.list_server_info(self.server)
-            elif choice == 3:
-                self.lists.list_software_architecture_info(self.software_architecture)
-            elif choice == 4:
-                break
-            else:
-                print("Opção inválida. Tente novamente.")
-            choice = int(input("Escolha uma opção: "))  
-
-
-    def create_default_repositories(self):
+    def CreateRepo(self):
         # Criação dos repositórios padrão com pacotes fictícios
         debian_repo1 = Repository("http://debian-repo1.com", "Debian Repository 1")
         debian_repo2 = Repository("http://debian-repo2.com", "Debian Repository 2")
@@ -168,4 +127,4 @@ class ComputerController:
 
 
 if __name__ == "__main__":
-    ComputerController().run()
+    ComputerController().Run()
