@@ -1,11 +1,18 @@
 import os
+from refresh import Refresh
+from machine import Machine
+from server import Server
+from architecture import SoftwareArchitecture
 
 class Menu:
     def __init__(self):
-        pass
+        self.refresh = Refresh()
+        self.machine = Machine()
+        self.server = Server()
+        self.software_architecture = SoftwareArchitecture()
 
     def MenuPrincipal(self):
-        os.system('clear')
+        self.refresh.Fresh()
         print("\nMenu Principal:")
         print("1. Analisar Hardware")
         print("2. Aplicativos")
@@ -15,17 +22,17 @@ class Menu:
         return int(input("Escolha uma opção: "))
 
     def MenuHardware(self):
-        os.system('clear')
+        self.refresh.Fresh()
         print("\nMenu de Hardware:")
         print("1. Analisar Saúde")
         print("2. Uso da CPU")
         print("3. Memória")
         print("4. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
+        # Implemente as funções correspondentes a cada opção do menu
 
     def MenuApp(self):
-        os.system('clear')
+        self.refresh.Fresh()
         print("\nMenu de Aplicativos:")
         print("1. Listar aplicativos instalados")
         print("2. Instalar aplicativos")
@@ -33,19 +40,19 @@ class Menu:
         print("4. Permissões do aplicativo")
         print("5. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
+        # Implemente as funções correspondentes a cada opção do menu
 
     def MenuRepository(self):
-        os.system('clear')
+        self.refresh.Fresh()
         print("\nMenu de Repositórios:")
         print("1. Listar repositórios (e seus pacotes)")
         print("2. Pacotes existentes")
         print("3. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
-        # Faltou implementar as funções
+        # Implemente as funções correspondentes a cada opção do menu
 
     def MenuInfo(self):
-        os.system('clear')
+        self.refresh.Fresh()
         print("\nMenu de Informações:")
         print("1. Máquina (Listar informações da máquina)")
         print("2. Servidor (Listar informações do servidor)")
@@ -53,15 +60,15 @@ class Menu:
         print("4. Voltar para menu principal")
         choice = int(input("Escolha uma opção: "))
 
-        while self.MenuInfo:
+        while True:
             if choice == 1:
-                self.lists.MachineInfo(self.machine)
+                self.machine.display_info()  
             elif choice == 2:
-                self.lists.ServerInfo(self.server)
+                self.server.display_info()  
             elif choice == 3:
-                self.lists.ArchitectureInfo(self.software_architecture)
+                self.software_architecture.display_info()  
             elif choice == 4:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
-            choice = int(input("Escolha uma opção: "))  
+            choice = int(input("Escolha uma opção: "))

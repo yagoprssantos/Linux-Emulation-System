@@ -1,15 +1,17 @@
 import os
 from appInterface import *
 from application import *
+from architecture import *
 from hardware import *
 from kernel import *
 from linuxOS import *
 from loading import *
 from machine import *
+from menu import *
+from package import *
+from refresh import *
 from repository import *
 from server import *
-from architecture import *
-from menu import *
 
 """
 #!Obrigatórios
@@ -33,7 +35,7 @@ Notas:
 class List:
 
     def MachineInfo(self, machine):
-        os.system('clear')
+        Refresh.Fresh()
         # Obtém informações sobre a máquina e imprime
         print("Informações da Máquina:")
         print(f"Tipo: {machine.machine_type}")
@@ -45,7 +47,7 @@ class List:
         ComputerController.MenuInfo()
 
     def ServerInfo(self, server):
-        os.system('clear')
+        Refresh.Fresh()
         # Obtém informações sobre o servidor e imprime
         print("Informações do servidor:")
         print(f"Tipo: {server.server_type}")
@@ -56,7 +58,7 @@ class List:
         input("Pressione Enter para voltar ao menu...")
 
     def ArchitectureInfo(self, software_architecture):
-        os.system('clear')
+        Refresh.Fresh()
         # Obtém informações sobre a arquitetura de software e imprime
         print("Informações da Arquitetura de Software:")
         print(f"Tipo: {software_architecture.software_type}")
@@ -75,42 +77,39 @@ class ComputerController:
         # Criação dos repositórios e pacotes padrão
         self.CreateRepo()
         self.lists = List()
-        self.linuxOS_system = LinuxOperatingSystem("Debian 12")
+        self.linuxOS = LinuxOperatingSystem("Debian 12")
         self.server = Server("Web Server", "192.168.1.1")
         self.server_machine = Machine("Physical", "Dell Server")
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
-
+        self.kernel_api = LinuxKernelAPI()
+        self.menu = Menu
 
     def Run(self):
-        os.system('clear')
-        # Inicialização do Sistema Operacional Linux
-        self.linuxOS_system.InstallDistro("Debian")
-        self.linuxOS_system.StartSystem()
+        Refresh.Fresh()
 
-        # Criação e inicialização do Servidor + Máquina
+        self.linuxOS.InstallDistro("Debian")
+        self.linuxOS.StartSystem()
+
         self.server.AddMachine(self.server_machine)
         self.server.InitializeServer()
 
-        # Identificação da máquina
-        # Interação com o Kernel do Linux
-        kernel_api = LinuxKernelAPI()
-        kernel_api.InteractWithKernel()
+        self.kernel_api.InteractWithKernel()
 
         # Inicialização dos menus
         while True:
-            choice = self.MenuPrincipal()
+            choice = self.menu.MenuPrincipal()
             if choice == 1:
-                self.MenuHardware()
+                self.menu.MenuHardware()
             elif choice == 2:
-                self.MenuApp()
+                self.menu.MenuApp()
             elif choice == 3:
-                self.MenuRepository()
+                self.menu.MenuRepository()
             elif choice == 4:
-                self.MenuInfo()
+                self.menu.MenuInfo()
             elif choice == 5:
-                os.system('clear')
-                self.linuxOS_system.ShutdownSystem()
+                Refresh.Fresh()
+                self.linuxOS.ShutdownSystem()
                 break
 
     def CreateRepo(self):
