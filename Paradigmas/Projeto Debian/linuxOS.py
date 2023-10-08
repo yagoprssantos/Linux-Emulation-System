@@ -19,7 +19,7 @@ class LinuxOperatingSystem:
         LoadingAnimation(3)
         for repository in self.repositories:
             repository.DownloadRepo()
-        time.sleep(3)
+        time.sleep(2)
 
     def StartSystem(self):
         # Inicia o sistema Linux.

@@ -7,7 +7,7 @@ from kernel import *
 from linuxOS import *
 from loading import *
 from machine import *
-from menu import *
+from menus import *
 from package import *
 from refresh import *
 from repository import *
@@ -43,8 +43,8 @@ class List:
         print(f"CPU: {machine.system_hardware.cpu}")
         print(f"Memória: {machine.system_hardware.memory}")
         print(f"Armazenamento: {machine.system_hardware.storage}")
-        input("Pressione Enter para voltar ao menu...")
-        ComputerController.MenuInfo()
+        if input("Pressione Enter para voltar ao menu...") == '':
+            Output.MenuInfo()
 
     def ServerInfo(self, server):
         Refresh.Fresh()
@@ -55,7 +55,8 @@ class List:
         print("Máquinas conectadas:")
         for machine in server.machines:
             print(f"- {machine.machine_type}: {machine.description}")
-        input("Pressione Enter para voltar ao menu...")
+        if input("Pressione Enter para voltar ao menu...") == '':
+            Output.MenuInfo()
 
     def ArchitectureInfo(self, software_architecture):
         Refresh.Fresh()
@@ -69,46 +70,52 @@ class List:
         print("Integrações:")
         for integration in software_architecture.integrations:
             print(f"- {integration}")
-        input("Pressione Enter para voltar ao menu...")
-        ComputerController.MenuInfo()
+        if input("Pressione Enter para voltar ao menu...") == '':
+            Output.MenuInfo()
 
-class ComputerController:
+class Output:
     def __init__(self):
         # Criação dos repositórios e pacotes padrão
         self.CreateRepo()
         self.lists = List()
+        self.refresh = Refresh()
         self.linuxOS = LinuxOperatingSystem("Debian 12")
         self.server = Server("Web Server", "192.168.1.1")
         self.server_machine = Machine("Physical", "Dell Server")
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
         self.kernel_api = LinuxKernelAPI()
-        self.menu = Menu
 
     def Run(self):
-        Refresh.Fresh()
+        '''
+        
+        self.refresh.Fresh()
 
         self.linuxOS.InstallDistro("Debian")
+        
         self.linuxOS.StartSystem()
+
+        self.kernel_api.InteractWithKernel()
 
         self.server.AddMachine(self.server_machine)
         self.server.InitializeServer()
 
-        self.kernel_api.InteractWithKernel()
+        '''
+        self.CreateRepo()
 
         # Inicialização dos menus
         while True:
-            choice = self.menu.MenuPrincipal()
+            choice = MainMenu().DisplayMenu()
             if choice == 1:
-                self.menu.MenuHardware()
+                HardwareMenu().DisplayMenu()
             elif choice == 2:
-                self.menu.MenuApp()
+                AppMenu().DisplayMenu()
             elif choice == 3:
-                self.menu.MenuRepository()
+                RepositoryMenu().DisplayMenu()
             elif choice == 4:
-                self.menu.MenuInfo()
+                InfoMenu().DisplayMenu()
             elif choice == 5:
-                Refresh.Fresh()
+                self.refresh.Fresh()
                 self.linuxOS.ShutdownSystem()
                 break
 
@@ -126,4 +133,4 @@ class ComputerController:
 
 
 if __name__ == "__main__":
-    ComputerController().Run()
+    Output().Run()
