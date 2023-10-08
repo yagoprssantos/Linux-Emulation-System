@@ -14,11 +14,10 @@ class Package:
         if not self.installed:
             print(f"Instalando {self.name}; Versão {self.version}", end='')
             LoadingAnimation(1)
-            time.sleep(2)
             self.installed = True
-            print(f"Pacote '{self.name}' instalado.")
+            print(f"Pacote '{self.name}' instalado.\n")
         else:
-            print(f"Pacote '{self.name}' já está instalado.")
+            print(f"Pacote '{self.name}' já está instalado.\n")
 
     def uninstall(self):
         # Desinstala o pacote de software.

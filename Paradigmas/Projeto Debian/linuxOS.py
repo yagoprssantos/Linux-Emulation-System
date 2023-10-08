@@ -1,7 +1,9 @@
-import time
+import time, random
 from loading import LoadingAnimation
 from kernel import LinuxKernel
 from architecture import SoftwareArchitecture
+from repository import Repository
+from package import Package
 
 class LinuxOperatingSystem:
     # Classe que coordena e gerencia todas as operações do sistema.
@@ -12,17 +14,31 @@ class LinuxOperatingSystem:
         self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
         self.repositories = []
 
-    def InstallDistro(self, name):
-        # Instala a distribuição Linux.
-        # Faça uma série de prints que simule a instalação do Debian.
+    def DefaultRepo(self):
+        repo_data = [
+        ("Debian Repository 1", "http://debian-repo1.com"),
+        ("Debian Repository 2", "http://debian-repo2.com"),
+        ("Debian Repository 3", "http://debian-repo3.com")
+    ]
+        for i in range(len(repo_data)):
+            name, url = repo_data[i]
+            repo = Repository(url, name)
+            for _ in range(1):
+                repo.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
+            self.repositories.append(repo)
+            
+    def InstallDistro(self, name, defaultRepo=None):
         print(f"Instalando distribuição {name}", end='')
         LoadingAnimation(3)
-        for repository in self.repositories:
-            repository.DownloadRepo()
-        time.sleep(2)
+        print("\n")
+        
+        if defaultRepo is None:
+            defaultRepo = self.repositories
+
+        for repository in defaultRepo:
+            repository.DownloadRepo(repository.name)
 
     def StartSystem(self):
-        # Inicia o sistema Linux.
         print("Ligando o Sistema Linux", end='')
         LoadingAnimation(1)
         self.kernel.InitializeKernel()
@@ -30,7 +46,6 @@ class LinuxOperatingSystem:
         time.sleep(2)
 
     def ShutdownSystem(self):
-        # Desliga o sistema Linux.
         print("Desligando o Sistema Linux", end='')
         LoadingAnimation(1)
         self.kernel.ShutdownKernel()

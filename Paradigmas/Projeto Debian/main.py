@@ -76,7 +76,6 @@ class List:
 class Output:
     def __init__(self):
         # Criação dos repositórios e pacotes padrão
-        self.CreateRepo()
         self.lists = List()
         self.refresh = Refresh()
         self.linuxOS = LinuxOperatingSystem("Debian 12")
@@ -87,11 +86,12 @@ class Output:
         self.kernel_api = LinuxKernelAPI()
 
     def Run(self):
-        '''
-        
+                
         self.refresh.Fresh()
 
-        self.linuxOS.InstallDistro("Debian")
+        self.linuxOS.DefaultRepo()
+        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        self.linuxOS.InstallDistro("Debian", defaultRepo)
         
         self.linuxOS.StartSystem()
 
@@ -100,8 +100,6 @@ class Output:
         self.server.AddMachine(self.server_machine)
         self.server.InitializeServer()
 
-        '''
-        self.CreateRepo()
 
         # Inicialização dos menus
         while True:
@@ -118,19 +116,6 @@ class Output:
                 self.refresh.Fresh()
                 self.linuxOS.ShutdownSystem()
                 break
-
-    def CreateRepo(self):
-        # Criação dos repositórios padrão com pacotes fictícios
-        debian_repo1 = Repository("http://debian-repo1.com", "Debian Repository 1")
-        debian_repo2 = Repository("http://debian-repo2.com", "Debian Repository 2")
-        debian_repo3 = Repository("http://debian-repo3.com", "Debian Repository 3")
-
-        # Geração de pacotes fictícios e adição aos repositórios
-        for _ in range(3):
-            debian_repo1.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
-            debian_repo2.repo_pack_list.append(Package(f"Package-{random.randint(101, 200)}", "2.0"))
-            debian_repo3.repo_pack_list.append(Package(f"Package-{random.randint(201, 300)}", "3.0"))
-
 
 if __name__ == "__main__":
     Output().Run()

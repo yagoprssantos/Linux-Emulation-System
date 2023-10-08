@@ -54,14 +54,9 @@ class AppMenu:
         return int(input("Escolha uma opção: "))
 
 class RepositoryMenu:
-    def __init__(self):
+    def __init__(self, repositories=[]):
         self.refresh = Refresh()
-
-    def ListRepositories(self, repositories):
-        print("Listando todos os repositórios:")
-        for idx, repository in enumerate(repositories, start=1):
-            print(f"{idx}. {repository.name}")
-
+        self.repositories = repositories
 
     def DisplayMenu(self):
         self.refresh.Fresh()

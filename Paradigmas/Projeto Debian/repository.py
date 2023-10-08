@@ -12,15 +12,15 @@ class Repository:
 
     def DownloadRepo(self, name):
         # Baixa pacotes do repositório.
-        print(f"\nEndereço: {self.address}\nBaixando pacotes de {name}", end='')
+        print(f"Endereço: {self.address}\nBaixando pacotes do repositório {self.name}", end='')
         LoadingAnimation(1)
         time.sleep(1)
 
-        # Faz loop para baixar todos os Packages do repositório
+        # Faz loop para baixar todos os pacotes do repositório
         for package in self.repo_pack_list:
-            Package.install(package)
+            package.install()
 
-        print("Pacotes baixados.")
+        print(f"Pacotes do repositório {self.name} baixados.\n")
 
     def ListPackages(self):
         # Lista os pacotes disponíveis no repositório.
