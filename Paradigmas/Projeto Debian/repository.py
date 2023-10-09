@@ -3,17 +3,14 @@ from loading import LoadingAnimation
 from package import Package
 
 class Repository:
-    # Classe que armazena e gerencia pacotes de software.
     def __init__(self, address, reponame):
-        # Inicializa o repositório com um endereço e nome específicos.
         self.address = address
         self.reponame = reponame
         self.repo_pack_list = []
 
     def DownloadRepo(self, reponame):
-        # Baixa pacotes do repositório.
         print(f"Endereço: {self.address}\nBaixando pacotes do repositório {self.reponame}", end='')
-        LoadingAnimation(1)
+        LoadingAnimation(2)
         time.sleep(1)
 
         # Faz loop para baixar todos os pacotes do repositório
@@ -23,7 +20,6 @@ class Repository:
         print(f"Pacotes do repositório {self.reponame} baixados.\n")
 
     def ListPackages(self):
-        # Lista os pacotes disponíveis no repositório.
         print(f"Pacotes no repositório {self.reponame}:")
         for package in self.repo_pack_list:
             print(f"- Nome: {package.reponame}")

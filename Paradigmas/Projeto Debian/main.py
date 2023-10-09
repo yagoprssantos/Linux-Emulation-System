@@ -102,8 +102,8 @@ class Output:
 
         self.kernel_api.InteractWithKernel()
 
-        self.server.AddMachine(self.server_machine)
         self.server.InitializeServer()
+        self.server.AddMachine(self.server_machine)
 
 
         # Inicialização dos menus
