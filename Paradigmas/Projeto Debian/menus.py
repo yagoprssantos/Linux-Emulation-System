@@ -7,6 +7,7 @@ from kernel import *
 from linuxOS import *
 from loading import *
 from machine import *
+from main import List
 from package import *
 from refresh import *
 from repository import *
@@ -78,30 +79,30 @@ class RepositoryMenu:
             choice = int(input("Escolha uma opção: "))
 
 class InfoMenu:
-    def __init__(self):
+    def __init__(self, machine, server, software_architecture):
         self.refresh = Refresh()
-        self.machine = Machine()
-        self.server = Server()
-        self.software_architecture = SoftwareArchitecture()
+        self.list = List()
+        self.machine = machine
+        self.server = server
+        self.software_architecture = software_architecture
 
     def DisplayMenu(self):
-        self.refresh.Fresh()
-        print("\nMenu de Informações:")
-        print("1. Máquina (Listar informações da máquina)")
-        print("2. Servidor (Listar informações do servidor)")
-        print("3. Arquitetura de Software (Listar informações da arquitetura de software)")
-        print("4. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-
         while True:
+            self.refresh.Fresh()
+            print("\nMenu de Informações:")
+            print("1. Máquina")
+            print("2. Servidor")
+            print("3. Arquitetura de Software")
+            print("4. Voltar para menu principal")
+            choice = int(input("Escolha uma opção: "))
+
             if choice == 1:
-                self.machine.display_info()  
+                self.list.MachineInfo(self.machine)
             elif choice == 2:
-                self.server.display_info()  
+                self.list.ServerInfo(self.server)
             elif choice == 3:
-                self.software_architecture.display_info()  
+                self.list.ArchitectureInfo(self.software_architecture)
             elif choice == 4:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
-            choice = int(input("Escolha uma opção: "))

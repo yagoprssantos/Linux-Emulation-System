@@ -30,7 +30,7 @@ class LinuxOperatingSystem:
     def InstallDistro(self, name, defaultRepo=None):
         print(f"Instalando distribuição {name}", end='')
         LoadingAnimation(3)
-        print("\n")
+        print()
         
         if defaultRepo is None:
             defaultRepo = self.repositories
