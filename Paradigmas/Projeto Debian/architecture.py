@@ -1,6 +1,9 @@
 import time
 from loading import LoadingAnimation
 
+# TODO: Adicionar uma ID
+# TODO: Adicionar Componentes e Integrações
+
 class SoftwareArchitecture:
     # Classe que define a estrutura e integrações dos componentes de software.
     def __init__(self, software_type, description):
