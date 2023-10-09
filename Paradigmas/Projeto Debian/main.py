@@ -16,7 +16,7 @@ class Output:
         self.kernel_api = LinuxKernelAPI()
 
     def Run(self):
-                
+        """
         self.refresh.Fresh()
 
         self.linuxOS.DefaultRepo()
@@ -30,6 +30,7 @@ class Output:
         self.server.InitializeServer()
         self.server.AddMachine(self.server_machine)
 
+        """ 
 
         # Inicialização dos menus
         while True:

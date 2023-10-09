@@ -42,7 +42,8 @@ class Repository:
             print(f"Pacote '{package_name}' não encontrado no repositório {self.reponame}.")
 
     def ListRepositories(self):
-        for package in self.repo_pack_list:
-            print(f"- Nome: {package.reponame}")
-            print(f"  Versão: {package.version}")
-            print(f"  Instalado: {'Sim' if package.installed else 'Não'}")
+        from linuxOS import LinuxOperatingSystem
+        print("\nLista de Repositórios:")
+        for repo in LinuxOperatingSystem("Debian 12").repositories:
+            print(repo.reponame, " -")
+            repo.ListPackages()

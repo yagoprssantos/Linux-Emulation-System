@@ -1,9 +1,10 @@
 from refresh import Refresh
-
+from appInterface import ApplicationInterface
 class List:
 
     def __init__(self):
         self.refresh = Refresh()
+        self.apps = ApplicationInterface()
 
     def MachineInfo(self, machine):
         self.refresh.Fresh()
@@ -43,3 +44,15 @@ class List:
             print(f"- {integration}")
         if input("Pressione Enter para voltar ao menu...") == '':
             return
+        
+    def InstalledApps(self):
+        while True:
+            self.refresh.Fresh()
+            if not self.apps.installed_apps:
+                print("Nenhum aplicativo instalado.")
+            else:
+                print("Aplicativos instalados:")
+                for index, app in enumerate(self.app_interface.installed_apps):
+                    print(f"{index + 1}. {app.name} (Versão: {app.version}, {'Em execução' if app.running else 'Parado'})")
+            if input("Pressione Enter para voltar ao menu...") == '':
+                break

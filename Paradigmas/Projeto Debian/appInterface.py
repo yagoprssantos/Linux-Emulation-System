@@ -11,7 +11,7 @@ class ApplicationInterface:
     def AddApplication(self, app_name, app_version):
         new_app = Application(app_name, app_version)
         self.installed_apps.append(new_app)
-        print(f"O aplicativo '{app_name}' foi instalado com sucesso!")
+        print(f"O aplicativo '{app_name}' foi instalado com sucesso!\n")
 
     def StartApplication(self, app_index):
         app = self.installed_apps[app_index]

@@ -2,7 +2,6 @@ import time, random
 from loading import LoadingAnimation
 from kernel import LinuxKernel
 from architecture import SoftwareArchitecture
-from repository import Repository
 from package import Package
 from hardware import Hardware
 
@@ -18,6 +17,7 @@ class LinuxOperatingSystem:
         self.repositories = []
 
     def DefaultRepo(self):
+        from repository import Repository
         repo_data = [
         ("Debian Repository 1", "http://debian-repo1.com"),
         ("Debian Repository 2", "http://debian-repo2.com"),

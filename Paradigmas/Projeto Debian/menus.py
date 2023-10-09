@@ -1,11 +1,16 @@
 import os
 from appInterface import *
-
 from linuxOS import *
 from machine import *
 from list import List
 from refresh import *
 from server import *
+from repository import Repository
+
+"""
+TODO: ARRUMAR MENU APPMENU
+TODO: TERMINAR MENUS
+"""
 
 class MainMenu:
     def __init__(self):
@@ -37,6 +42,9 @@ class HardwareMenu:
 class AppMenu:
     def __init__(self):
         self.refresh = Refresh()
+        self.app_interface = ApplicationInterface()
+        self.list = List()
+
 
     def DisplayMenu(self):
         self.refresh.Fresh()
@@ -46,12 +54,35 @@ class AppMenu:
         print("3. Iniciar aplicativo")
         print("4. Permissões do aplicativo")
         print("5. Voltar para menu principal")
-        return int(input("Escolha uma opção: "))
+        choice = input("Escolha uma opção: ")
+
+        while True:
+            if choice == "1":
+                self.list.InstalledApps()
+            elif choice == "2":
+                app_name = input("Digite o nome do aplicativo a ser instalado: ")
+                app_version = input("Digite a versão do aplicativo: ")
+                self.app_interface.AddApplication(app_name, app_version)
+                if input("Deseja adicionar outro aplicativo? (S/N) ") == "S":
+                    return
+            elif choice == "3":
+                app_index = int(input("Digite o índice do aplicativo a ser iniciado: "))
+                self.app_interface.StartApplication(app_index)
+            elif choice == "4":
+                app_index = int(input("Digite o índice do aplicativo para gerenciar permissões: "))
+                self.app_interface.ManagePermissions(app_index)
+            elif choice == "5":
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
 
 class RepositoryMenu:
     def __init__(self, repositories=[]):
         self.refresh = Refresh()
         self.repositories = repositories
+        self.repository = Repository()
+        
 
     def DisplayMenu(self):
         self.refresh.Fresh()
@@ -63,7 +94,7 @@ class RepositoryMenu:
 
         while True:
             if choice == 1:
-                pass
+                self.repository.ListRepositories()
             elif choice == 2:
                 pass
             elif choice == 3:
