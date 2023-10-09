@@ -1,16 +1,10 @@
 import os
 from appInterface import *
-from application import *
-from architecture import *
-from hardware import *
-from kernel import *
+
 from linuxOS import *
-from loading import *
 from machine import *
-from main import List
-from package import *
+from list import List
 from refresh import *
-from repository import *
 from server import *
 
 class MainMenu:

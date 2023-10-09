@@ -1,17 +1,16 @@
-import time, repository
+import time,random
 from loading import LoadingAnimation
+from repository import Repository
 
-class Package(repository):
+class Package(Repository):
     # Classe que representa um pacote de software instalável.
     def __init__(self, address, reponame, packname, version):
         super().__init__(address, reponame)
-        # Inicializa um pacote de software com um nome e versão.
         self.packname = packname
-        self.version = version
+        self.version = round(random.uniform(1.0, 12.0), 1)
         self.installed = False  # Estado de instalação
 
     def install(self):
-        # Instala o pacote de software.
         if not self.installed:
             print(f"Instalando {self.packname}; Versão {self.version}", end='')
             LoadingAnimation(1)

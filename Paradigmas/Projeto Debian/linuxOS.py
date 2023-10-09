@@ -14,7 +14,7 @@ class LinuxOperatingSystem:
         self.version = version
         self.kernel = LinuxKernel("4.0")
         self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
-        self.hardware = Hardware()
+        self.hardware = Hardware
         self.repositories = []
 
     def DefaultRepo(self):
@@ -27,7 +27,7 @@ class LinuxOperatingSystem:
             name, url = repo_data[i]
             repo = Repository(url, name)
             for _ in range(1):
-                repo.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", "1.0"))
+                repo.repo_pack_list.append(Package({name}, {url},f"Package-{random.randint(1, 100)}", round(random.uniform(1.0, 12.0), 1)))
             self.repositories.append(repo)
             
     def InstallDistro(self, name, defaultRepo=None):
@@ -39,7 +39,7 @@ class LinuxOperatingSystem:
             defaultRepo = self.repositories
 
         for repository in defaultRepo:
-            repository.DownloadRepo(repository.name)
+            repository.DownloadRepo(repository.reponame)
 
     def StartSystem(self):
         print("Ligando o Sistema Linux", end='')

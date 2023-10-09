@@ -1,6 +1,5 @@
 import time
 from loading import LoadingAnimation
-from package import Package
 
 class Repository:
     def __init__(self, address, reponame):
