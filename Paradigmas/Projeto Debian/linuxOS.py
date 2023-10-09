@@ -6,7 +6,6 @@ from repository import Repository
 from package import Package
 from hardware import Hardware
 
-# TODO: Adicionar Hardware como atributo
 
 class LinuxOperatingSystem:
     # Classe que coordena e gerencia todas as operações do sistema.
@@ -15,7 +14,7 @@ class LinuxOperatingSystem:
         self.version = version
         self.kernel = LinuxKernel("4.0")
         self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
-        self.hardware = Hardware
+        self.hardware = Hardware()
         self.repositories = []
 
     def DefaultRepo(self):

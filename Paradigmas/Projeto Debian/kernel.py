@@ -1,14 +1,26 @@
 import time
 from loading import LoadingAnimation
 
-# TODO: Implementar lista de dispositivos controlados
 
 class LinuxKernel:
     # Classe que representa o Kernel do Linux responsável pelo gerenciamento de hardware, recursos do sistema e interação com dispositivos.
     def __init__(self, version):
         # Inicializa o Kernel do Linux com uma versão específica.
         self.version = version
-        self.devices = []
+        self.devices = [
+            "CPU1", "CPU2", "CPU3", "CPU4",
+            "RAM1", "RAM2",
+            "SSD1", "SSD2",
+            "PlacaDeRedeEthernet", "AdaptadorWiFi",
+            "Teclado", "Mouse",
+            "PlacaDeVideo", "Monitor",
+            "PlacaDeSom", "DispositivoDeAudio",
+            "Touchpad",
+            "SistemaDeArquivos",
+            "Temporizadores", "RelogioDoSistema",
+            "DispositivoDeCriptografia", "DispositivoDeSeguranca", "DispositivoDeVirtualizacao",
+            "FonteDeEnergia"
+        ]
 
     def InitializeKernel(self):
         # Inicializa o Kernel do Linux.

@@ -1,6 +1,7 @@
 import time
 from loading import LoadingAnimation
 from application import *
+from hardware import *
 
 class ApplicationInterface:
     def __init__(self):
@@ -16,7 +17,11 @@ class ApplicationInterface:
         app = self.installed_apps[app_index]
         app_operations = {
             0: lambda: print(f"O aplicativo '{app.name}' já está em execução."),
-            1: lambda: print(f"Iniciando o aplicativo '{app.name}' (Versão: {app.version})'{LoadingAnimation(1)}'\nAplicativo '{app.name}' iniciado com sucesso!")
+            1: lambda: print(f"Iniciando o aplicativo '{app.name}' (Versão: {app.version})",
+                             {LoadingAnimation(1)},
+                             Hardware.AllocateMemory(app.name),
+                             self.running_apps.append[app.name]
+                             ,f"\nAplicativo '{app.name}' iniciado com sucesso!")
         }
         app_operations[app.running]()
 
@@ -24,7 +29,11 @@ class ApplicationInterface:
         app = self.installed_apps[app_index]
         app_operations = {
             0: lambda: print(f"O aplicativo '{app.name}' não está em execução."),
-            1: lambda: print(f"Parando o aplicativo '{app.name}' (Versão: {app.version})'{LoadingAnimation(1)}'\nAplicativo '{app.name}' parado com sucesso!")
+            1: lambda: print(f"Parando o aplicativo '{app.name}' (Versão: {app.version})",
+                             {LoadingAnimation(1)},
+                             Hardware.ReleaseMemory(app.name),
+                             self.running_apps.remove[app.name]
+                             ,f"\nAplicativo '{app.name}' parado com sucesso!")
         }
         app_operations[app.running]()
 
@@ -50,7 +59,7 @@ class ApplicationInterface:
                 if 1 <= option <= len(permissions):
                     permission = permissions[option - 1]
                     app.permissions[permission] = not app.permissions[permission]
-                    print(f"Permissão '{permission}' invertida.")
+                    print(f"Permissão '{permission}' trocada.")
                 elif option == 4:
                     break
                 else:

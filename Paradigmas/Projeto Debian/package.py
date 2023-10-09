@@ -1,7 +1,7 @@
 import time, repository
 from loading import LoadingAnimation
 
-class Package(repository.Repository):
+class Package(repository):
     # Classe que representa um pacote de software instalável.
     def __init__(self, address, reponame, packname, version):
         super().__init__(address, reponame)

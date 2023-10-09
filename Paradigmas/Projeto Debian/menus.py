@@ -106,3 +106,26 @@ class InfoMenu:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
+
+class MemoryMenu:
+    def __init__(self):
+        self.hardware = Hardware()
+
+    def DisplayMenu(self):
+        while True:
+            print("\nMenu de Gerenciamento de Memória:")
+            print("1. Alocar memória")
+            print("2. Liberar memória")
+            print("3. Voltar ao menu de hardware")
+            choice = input("Escolha uma opção: ")
+
+            if choice == "1":
+                app_name = input("Digite o nome do aplicativo para alocar memória: ")
+                self.hardware.AllocateMemory(app_name)
+            elif choice == "2":
+                app_name = input("Digite o nome do aplicativo para liberar memória: ")
+                self.hardware.ReleaseMemory(app_name)
+            elif choice == "3":
+                break
+            else:
+                print("Opção inválida. Tente novamente.")

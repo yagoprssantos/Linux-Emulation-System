@@ -9,6 +9,7 @@ class Hardware:
         self.cpu = cpu
         self.memory = memory
         self.storage = storage
+        self.cpu_usage = random.randint(28, 36)
 
     def CheckHealth(self):
         # Verifica o estado de saúde dos componentes de hardware.
@@ -19,28 +20,36 @@ class Hardware:
         print(f"Saúde do hardware: {random.choice(health_list)}!")
         time.sleep(1)
 
-    def MonitorCPU(self):
+    def MonitorCPU(self, running_apps):
         # Monitora o uso da CPU.
         print("Monitorando o uso da CPU", end='')
         LoadingAnimation(1)
         LinuxKernelAPI.InteractWithKernel()
-        cpu_usage = random.randint(10, 90)  # Simula o uso aleatório da CPU
-        print(f"Uso da CPU: {cpu_usage}%")
+        num_running_apps = sum(app.running for app in running_apps)
+        if num_running_apps == 0:
+            self.cpu_usage = random.randint(28, 36) 
+        else:
+            self.cpu_usage = min(50 + 10 * (num_running_apps - 1), 100)  # CPU aumenta com base no número de aplicativos em execução.
+        print(f"Uso da CPU: {self.cpu_usage}%")
         time.sleep(1)
 
-    def ManageMemory(self):
-        # Gerencia os recursos de memória.
-        print("Gerenciando os recursos de memória", end='')
-        LoadingAnimation(1)
-        LinuxKernelAPI.InteractWithKernel()
-        
-        # Simula a alocação e liberação de memória para um processo fictício
-        allocated_memory = random.randint(1, 16)  # em GB
-        print(f"Alocando {allocated_memory}GB de memória para um processo fictício.")
-        LoadingAnimation(2)
-        time.sleep(1)
-        
-        print(f"Liberando {allocated_memory}GB de memória após o término do processo.")
-        LoadingAnimation(1)
-        time.sleep(1)
+    def ShowMemoryAllocations(self):
+        # Mostra as memórias alocadas e seus endereços.
+        print("Memórias alocadas:")
+        for app_name, memory_address in self.memory_allocations.items():
+            print(f"- '{app_name}': {memory_address}")
+
+    def AllocateMemory(self, app_name):
+        # Aloca memória para um aplicativo.
+        memory_address = "0x" + ''.join(random.choice('0123456789ABCDEF') for _ in range(8))
+        self.memory_allocations[app_name] = memory_address
+        print(f"Memória alocada para '{app_name}' no endereço {memory_address}")
+
+    def ReleaseMemory(self, app_name):
+        # Libera memória de um aplicativo.
+        if app_name in self.memory_allocations:
+            del self.memory_allocations[app_name]
+            print(f"Memória liberada de '{app_name}'")
+        else:
+            print(f"Não há alocação de memória para '{app_name}'")
 
