@@ -1,4 +1,5 @@
 import time
+
 from loading import LoadingAnimation
 
 
@@ -9,8 +10,8 @@ class LinuxKernel:
         self.version = version
         self.devices = [
             "CPU1", "CPU2", "CPU3", "CPU4",
-            "RAM1", "RAM2",
-            "SSD1", "SSD2",
+            "RAM1",
+            "SSD1",
             "PlacaDeRedeEthernet", "AdaptadorWiFi",
             "Teclado", "Mouse",
             "PlacaDeVideo", "Monitor",

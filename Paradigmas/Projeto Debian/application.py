@@ -1,3 +1,6 @@
+
+# TODO: APAGAR classe Application e juntar com outras funções menores
+
 class Application:
     def __init__(self, name, version):
         self.name = name

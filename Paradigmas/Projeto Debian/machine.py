@@ -1,4 +1,5 @@
-from hardware import Hardware
+
+# TODO: APAGAR classe Machine e juntar com outras funções menores
 
 class Machine:
     # Classe que representa uma máquina física ou virtual.
@@ -6,4 +7,3 @@ class Machine:
         # Inicializa uma máquina com um tipo e descrição específicos.
         self.machine_type = machine_type
         self.description = description
-        self.system_hardware = Hardware("Intel i7", "16GB", "1TB SSD")

@@ -1,5 +1,7 @@
 import sys, time
 
+# TODO: APAGAR arquivo loading.py e juntar LoadingAnimation com outras funções menores
+
 # Função meramente ilustrativa para imitar o loading
 def LoadingAnimation(repeat_times=0):
     for _ in range(repeat_times):

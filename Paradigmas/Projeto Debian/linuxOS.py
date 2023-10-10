@@ -1,4 +1,5 @@
 import time, random
+
 from loading import LoadingAnimation
 from kernel import LinuxKernel
 from architecture import SoftwareArchitecture

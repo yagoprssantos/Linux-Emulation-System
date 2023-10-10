@@ -1,8 +1,8 @@
-import os
 from loading import *
 from menus import *
 from list import *
 
+# Existem TODOs pelo código. Abra os arquivos e vá encontrando-os :)
 
 class Output:
     def __init__(self):
@@ -10,13 +10,12 @@ class Output:
         self.refresh = Refresh()
         self.linuxOS = LinuxOperatingSystem("Debian 12")
         self.server = Server("Web Server", "192.168.1.1")
-        self.server_machine = Machine("Physical", "Dell Server")
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
         self.kernel_api = LinuxKernelAPI()
 
     def Run(self):
-        """
+         
         self.refresh.Fresh()
 
         self.linuxOS.DefaultRepo()
@@ -29,8 +28,7 @@ class Output:
 
         self.server.InitializeServer()
         self.server.AddMachine(self.server_machine)
-
-        """ 
+        
 
         # Inicialização dos menus
         while True:

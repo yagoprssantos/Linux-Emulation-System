@@ -1,12 +1,14 @@
-import time
 from loading import LoadingAnimation
 from application import *
 from hardware import *
+
+# TODO: Termine de implementar todas as funções
 
 class ApplicationInterface:
     def __init__(self):
         self.installed_apps = []
         self.running_apps = []
+        self.hardware = Hardware()
 
     def AddApplication(self, app_name, app_version):
         new_app = Application(app_name, app_version)
@@ -14,28 +16,36 @@ class ApplicationInterface:
         print(f"O aplicativo '{app_name}' foi instalado com sucesso!\n")
 
     def StartApplication(self, app_index):
-        app = self.installed_apps[app_index]
-        app_operations = {
-            0: lambda: print(f"O aplicativo '{app.name}' já está em execução."),
-            1: lambda: print(f"Iniciando o aplicativo '{app.name}' (Versão: {app.version})",
-                             {LoadingAnimation(1)},
-                             Hardware.AllocateMemory(app.name),
-                             self.running_apps.append[app.name]
-                             ,f"\nAplicativo '{app.name}' iniciado com sucesso!")
-        }
-        app_operations[app.running]()
+        app_name = self.installed_apps[app_index].name
+        app_version = self.installed_apps[app_index].version
+        app = next((app for app in self.installed_apps if app.name == app_name), None)
+        if app is None:
+            print(f"O aplicativo '{app_name}' não foi encontrado.")        
+        if app.running == True:
+            print(f"O aplicativo '{app_name}' já está em execução.")
+        else:
+            print(f"Iniciando o aplicativo '{app_name}' (Versão: {app_version})", end='')
+            LoadingAnimation(1)
+            self.hardware.AllocateMemory(app_name)
+            app.running = True
+            self.running_apps.append(app_name)
+            print(f"\nAplicativo '{app_name}' iniciado com sucesso!")
 
     def StopApplication(self, app_index):
-        app = self.installed_apps[app_index]
-        app_operations = {
-            0: lambda: print(f"O aplicativo '{app.name}' não está em execução."),
-            1: lambda: print(f"Parando o aplicativo '{app.name}' (Versão: {app.version})",
-                             {LoadingAnimation(1)},
-                             Hardware.ReleaseMemory(app.name),
-                             self.running_apps.remove[app.name]
-                             ,f"\nAplicativo '{app.name}' parado com sucesso!")
-        }
-        app_operations[app.running]()
+        app_name = self.installed_apps[app_index].name
+        app_version = self.installed_apps[app_index].version
+        app = next((app for app in self.installed_apps if app.name == app_name), None)
+        if app is None:
+            print(f"O aplicativo '{app_name}' não foi encontrado.")
+        elif app.running == False:
+            print(f"O aplicativo '{app_name}' não está em execução.")
+        else:
+            print(f"Parando o aplicativo '{app_name}' (Versão: {app_version})", end='')
+            LoadingAnimation(1)
+            Hardware.ReleaseMemory(app_name)
+            app.running = False
+            self.running_apps.remove(app_name)
+            print(f"\nAplicativo '{app_name}' parado com sucesso!")
 
     def ManagePermissions(self, app_index):
         app = self.installed_apps[app_index]

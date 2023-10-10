@@ -1,4 +1,5 @@
 import os
+
 from appInterface import *
 from linuxOS import *
 from machine import *
@@ -7,10 +8,13 @@ from refresh import *
 from server import *
 from repository import Repository
 
-"""
-TODO: ARRUMAR MENU APPMENU
-TODO: TERMINAR MENUS
-"""
+# TODO: Terminar menus:
+#!           - HardwareMenu   (Não foi feito)
+#?           - AppMenu        (Incompleto)
+#?           - RepositoryMenu (Incompleto)
+#*           - InfoMenu       (Completo)
+#            - MemoryMenu     (Em testes)
+
 
 class MainMenu:
     def __init__(self):
@@ -26,6 +30,7 @@ class MainMenu:
         print("5. Sair do Linux")
         return int(input("Escolha uma opção: "))
 
+
 class HardwareMenu:
     def __init__(self):
         self.refresh = Refresh()
@@ -39,39 +44,48 @@ class HardwareMenu:
         print("4. Voltar para menu principal")
         return int(input("Escolha uma opção: "))
 
+
 class AppMenu:
     def __init__(self):
         self.refresh = Refresh()
         self.app_interface = ApplicationInterface()
         self.list = List()
 
-
     def DisplayMenu(self):
-        self.refresh.Fresh()
-        print("\nMenu de Aplicativos:")
-        print("1. Listar aplicativos instalados")
-        print("2. Instalar aplicativos")
-        print("3. Iniciar aplicativo")
-        print("4. Permissões do aplicativo")
-        print("5. Voltar para menu principal")
-        choice = input("Escolha uma opção: ")
-
         while True:
+            self.refresh.Fresh()
+            print("\nMenu de Aplicativos:")
+            print("1. Listar aplicativos instalados")
+            print("2. Instalar aplicativos")
+            print("3. Iniciar aplicativo")
+            print("4. Parar aplicativo")
+            print("5. Permissões do aplicativo")
+            print("6. Voltar para menu principal")
+            choice = input("Escolha uma opção: ")
+
             if choice == "1":
-                self.list.InstalledApps()
+                self.list.InstalledApps(self.app_interface.installed_apps)
+                input("\nPressione Enter para voltar ao menu...")
             elif choice == "2":
-                app_name = input("Digite o nome do aplicativo a ser instalado: ")
-                app_version = input("Digite a versão do aplicativo: ")
-                self.app_interface.AddApplication(app_name, app_version)
-                if input("Deseja adicionar outro aplicativo? (S/N) ") == "S":
-                    return
+                while True:
+                    app_name = str(input("\nDigite o nome do aplicativo a ser instalado: "))
+                    app_version = round(float(input("Digite a versão do aplicativo (float): ")), 1)
+                    self.app_interface.AddApplication(app_name, app_version)
+                    if input("Deseja adicionar outro aplicativo? (S/N) ").upper() == "N":
+                        break   
             elif choice == "3":
-                app_index = int(input("Digite o índice do aplicativo a ser iniciado: "))
-                self.app_interface.StartApplication(app_index)
+                self.list.InstalledApps(self.app_interface.installed_apps)
+                index = int(input("\nDigite o índice do aplicativo a ser iniciado: ")) - 1
+                self.app_interface.StartApplication(index)
             elif choice == "4":
-                app_index = int(input("Digite o índice do aplicativo para gerenciar permissões: "))
-                self.app_interface.ManagePermissions(app_index)
+                self.list.InstalledApps(self.app_interface.installed_apps)
+                index = int(input("\nDigite o índice do aplicativo a ser parado: ")) - 1
+                self.app_interface.StopApplication(index)
             elif choice == "5":
+                self.list.InstalledApps(self.app_interface.installed_apps)
+                index = int(input("\nDigite o índice do aplicativo para gerenciar permissões: ")) - 1
+                self.app_interface.ManagePermissions(index)
+            elif choice == "6":
                 break
             else:
                 print("Opção inválida. Tente novamente.")
@@ -103,6 +117,7 @@ class RepositoryMenu:
                 print("Opção inválida. Tente novamente.")
             choice = int(input("Escolha uma opção: "))
 
+
 class InfoMenu:
     def __init__(self, machine, server, software_architecture):
         self.refresh = Refresh()
@@ -131,6 +146,7 @@ class InfoMenu:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
+
 
 class MemoryMenu:
     def __init__(self):

@@ -1,8 +1,7 @@
 import time
 from loading import LoadingAnimation
 
-# TODO: Adicionar uma ID
-# TODO: Adicionar Componentes e Integrações
+# TODO: Fazer com que as funções de fato sejam efetivas e funcionais
 
 class SoftwareArchitecture:
     # Classe que define a estrutura e integrações dos componentes de software.

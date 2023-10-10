@@ -1,15 +1,21 @@
 import time, random
+
 from loading import LoadingAnimation
 from kernel import LinuxKernelAPI
+from machine import Machine
 
-class Hardware:
+# TODO: Terminar as funções de alocação e liberação de memória
+
+class Hardware(Machine):
     # Classe que representa os componentes de hardware de uma máquina.
-    def __init__(self, cpu, memory, storage):
+    def __init__(self,  machine_type="Físico", description="Samsung",  cpu="Intel i7", memory="16GB", storage="1TB SSD"):
         # Inicializa os componentes de hardware: CPU, memória e armazenamento.
+        super().__init__(machine_type, description)
         self.cpu = cpu
         self.memory = memory
         self.storage = storage
         self.cpu_usage = random.randint(28, 36)
+        self.memory_allocations = []
 
     def CheckHealth(self):
         # Verifica o estado de saúde dos componentes de hardware.
@@ -42,14 +48,20 @@ class Hardware:
     def AllocateMemory(self, app_name):
         # Aloca memória para um aplicativo.
         memory_address = "0x" + ''.join(random.choice('0123456789ABCDEF') for _ in range(8))
-        self.memory_allocations[app_name] = memory_address
+        
+        self.memory_allocations.append(memory_address)
+        print(self.memory_allocations)
         print(f"Memória alocada para '{app_name}' no endereço {memory_address}")
+        input()
 
     def ReleaseMemory(self, app_name):
+
         # Libera memória de um aplicativo.
         if app_name in self.memory_allocations:
-            del self.memory_allocations[app_name]
+            self.memory_allocations.remove()
             print(f"Memória liberada de '{app_name}'")
         else:
             print(f"Não há alocação de memória para '{app_name}'")
+        input()
+
 
