@@ -26,9 +26,25 @@ class LinuxOperatingSystem:
     ]
         for i in range(len(repo_data)):
             name, url = repo_data[i]
-            repo = Repository(url, name)
+            repo = Repository(name, url)
             for _ in range(1):
-                repo.repo_pack_list.append(Package({name}, {url},f"Package-{random.randint(1, 100)}", round(random.uniform(1.0, 12.0), 1)))
+                repo.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", round(random.uniform(1.0, 12.0), 1)))
+            self.repositories.append(repo)
+    
+    def DefaultRepo(self):
+        from repository import Repository
+        repo_data = [
+        ("Debian Repository 1", "http://debian-repo1.com"),
+        ("Debian Repository 2", "http://debian-repo2.com"),
+        ("Debian Repository 3", "http://debian-repo3.com")
+        ]
+        for i in range(len(repo_data)):
+            repo_name, repo_url = repo_data[i]
+            repo = Repository(repo_name, repo_url)
+            for _ in range(1):
+                pack_name = f"Package-{random.randint(1, 100)}"
+                pack_version = round(random.uniform(1.0, 12.0), 1)
+                repo.repo_pack_list.append(Package(repo_name, repo_url, pack_name, pack_version))
             self.repositories.append(repo)
             
     def InstallDistro(self, name, defaultRepo=None):

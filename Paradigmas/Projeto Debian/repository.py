@@ -6,9 +6,9 @@ from loading import LoadingAnimation
 
 class Repository:
     # Classe que armazena informações e funções de repositórios
-    def __init__(self, address, reponame):
-        self.address = address
+    def __init__(self, reponame, address):
         self.reponame = reponame
+        self.address = address
         self.repo_pack_list = []
 
     def DownloadRepo(self, reponame):
@@ -17,23 +17,16 @@ class Repository:
         time.sleep(1)
         # Faz loop para baixar todos os pacotes do repositório
         for package in self.repo_pack_list:
-            package.install()
+            # Use the repository name from the Package object
+            package.install(package.reponame)
         print(f"Pacotes do repositório {self.reponame} baixados.\n")
 
     def ListPackages(self):
         print(f"Pacotes no repositório {self.reponame}:")
         for package in self.repo_pack_list:
-            print(f"- Nome: {package.reponame}")
+            print(f"- Nome: {package.packname}")
             print(f"  Versão: {package.version}")
             print(f"  Instalado: {'Sim' if package.installed else 'Não'}\n")
-
-    def ListRepositories(self):
-        # ista todos os repositórios e seus pacotes
-        from linuxOS import LinuxOperatingSystem
-        print("\nLista de Repositórios:")
-        for repo in LinuxOperatingSystem("Debian 12").repositories:
-            print(repo.reponame, " -")
-            repo.ListPackages()
 
     def InstallPackage(self, package_name):
         # Instala um pacote pelo nome, se existir no repositório
@@ -49,5 +42,4 @@ class Repository:
         if package:
             package.uninstall(package)
         else:
-
             print(f"Pacote '{package_name}' não encontrado no repositório {self.reponame}.")
