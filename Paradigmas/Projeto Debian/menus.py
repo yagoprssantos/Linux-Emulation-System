@@ -10,7 +10,7 @@ from repository import Repository
 
 # TODO: Terminar menus:
 #!           - HardwareMenu   (Não foi feito)
-#*           - AppMenu        (Completo)
+#?           - AppMenu        (Incompleto)
 #*           - RepositoryMenu (Completo)
 #*           - InfoMenu       (Completo)
 #            - MemoryMenu     (Em testes)
