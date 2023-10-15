@@ -11,7 +11,7 @@ from repository import Repository
 # TODO: Terminar menus:
 #!           - HardwareMenu   (Não foi feito)
 #?           - AppMenu        (Incompleto)
-#?           - RepositoryMenu (Incompleto)
+#*           - RepositoryMenu (Completo)
 #*           - InfoMenu       (Completo)
 #            - MemoryMenu     (Em testes)
 
@@ -80,40 +80,75 @@ class AppMenu:
             self.refresh.Fresh()
             print("\nMenu de Aplicativos:")
             print("1. Listar aplicativos instalados")
-            print("2. Instalar aplicativos")
-            print("3. Iniciar aplicativo")
-            print("4. Parar aplicativo")
-            print("5. Permissões do aplicativo")
-            print("6. Voltar para menu principal")
+            print("2. Configurar aplicativos")
+            print("3. Voltar para menu principal")
             choice = input("Escolha uma opção: ")
 
             if choice == "1":
                 self.list.InstalledApps(self.app_interface.installed_apps)
                 input("\nPressione Enter para voltar ao menu...")
             elif choice == "2":
+                ConfigAppMenu().DisplayMenu()
+            elif choice == "3":
+                break
+
+            else:
+                print("Opção inválida. Tente novamente.")
+
+class ConfigAppMenu:
+    def __init__(self):
+        self.refresh = Refresh()
+        self.app_interface = ApplicationInterface()
+        self.list = List()
+
+    def DisplayMenu(self):
+        while True:
+            self.refresh.Fresh()
+            print("\nConfigurações de Aplicativos:")
+            print("1. Instalar aplicativos")
+            print("2. Desinstalar aplicativo")
+            print("3. Iniciar aplicativo")
+            print("4. Parar aplicativo")
+            print("5. Permissões do aplicativo")
+            print("6. Voltar para menu de aplicativos")
+            choice = input("Escolha uma opção: ")
+            
+            if choice == "1":
+                self.refresh.Fresh()
                 while True:
                     app_name = str(input("\nDigite o nome do aplicativo a ser instalado: "))
                     app_version = round(float(input("Digite a versão do aplicativo (float): ")), 1)
                     self.app_interface.AddApplication(app_name, app_version)
                     if input("Deseja adicionar outro aplicativo? (S/N) ").upper() == "N":
-                        break   
+                        break  
+            elif choice == "2":
+                self.list.InstalledApps(self.app_interface.installed_apps)
+                index = int(input("\nDigite o índice do aplicativo a ser desinstalado: ")) - 1
+                self.app_interface.RemoveApplication(index)
+                input("\nPressione Enter para voltar ao menu...")
+
             elif choice == "3":
                 self.list.InstalledApps(self.app_interface.installed_apps)
                 index = int(input("\nDigite o índice do aplicativo a ser iniciado: ")) - 1
                 self.app_interface.StartApplication(index)
+                input("\nPressione Enter para voltar ao menu...")
+
             elif choice == "4":
                 self.list.InstalledApps(self.app_interface.installed_apps)
                 index = int(input("\nDigite o índice do aplicativo a ser parado: ")) - 1
                 self.app_interface.StopApplication(index)
+                input("\nPressione Enter para voltar ao menu...")
+
             elif choice == "5":
                 self.list.InstalledApps(self.app_interface.installed_apps)
                 index = int(input("\nDigite o índice do aplicativo para gerenciar permissões: ")) - 1
                 self.app_interface.ManagePermissions(index)
+
             elif choice == "6":
                 break
+
             else:
                 print("Opção inválida. Tente novamente.")
-
 
 class RepositoryMenu:
     def __init__(self, linuxOS):

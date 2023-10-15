@@ -18,16 +18,16 @@ class Output:
          
         self.refresh.Fresh()
 
-        self.linuxOS.DefaultRepo()
-        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
-        self.linuxOS.InstallDistro("Debian", defaultRepo)
+        # self.linuxOS.DefaultRepo()
+        # defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        # self.linuxOS.InstallDistro("Debian", defaultRepo)
         
-        self.linuxOS.StartSystem()
+        # self.linuxOS.StartSystem()
 
-        self.kernel_api.InteractWithKernel()
+        # self.kernel_api.InteractWithKernel()
 
-        self.server.InitializeServer()
-        self.server.AddMachine(self.machine)
+        # self.server.InitializeServer()
+        # self.server.AddMachine(self.machine)
         
 
         #Inicialização dos menus

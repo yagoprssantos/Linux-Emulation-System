@@ -46,22 +46,21 @@ class Hardware(Machine):
             print(f"- '{app_name}': {memory_address}")
 
     def AllocateMemory(self, app_name):
-        # Aloca memória para um aplicativo.
-        memory_address = "0x" + ''.join(random.choice('0123456789ABCDEF') for _ in range(8))
-        
-        self.memory_allocations.append(memory_address)
-        print(self.memory_allocations)
-        print(f"Memória alocada para '{app_name}' no endereço {memory_address}")
-        input()
+        if app_name not in self.memory_allocations:
+            # Aloca memória para um aplicativo.
+            memory_address = "0x" + ''.join(random.choice('0123456789ABCDEF') for _ in range(8))
+            
+            self.memory_allocations.append(memory_address)
+            print(f"Memória alocada para '{app_name}' no endereço {memory_address}")
+        else:
+            print(f"'{app_name}' já possui alocação de memória")
 
     def ReleaseMemory(self, app_name):
-
         # Libera memória de um aplicativo.
         if app_name in self.memory_allocations:
             self.memory_allocations.remove()
             print(f"Memória liberada de '{app_name}'")
         else:
             print(f"Não há alocação de memória para '{app_name}'")
-        input()
 
 
