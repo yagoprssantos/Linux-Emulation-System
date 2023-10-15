@@ -11,7 +11,7 @@ from repository import Repository
 # TODO: Terminar menus:
 #!           - HardwareMenu   (Não foi feito)
 #?           - AppMenu        (Incompleto)
-#?           - RepositoryMenu (Incompleto)
+#*           - RepositoryMenu (Completo)
 #*           - InfoMenu       (Completo)
 #            - MemoryMenu     (Em testes)
 
