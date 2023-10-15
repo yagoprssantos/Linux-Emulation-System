@@ -52,6 +52,7 @@ class ApplicationInterface:
         permissions = ["Leitura", "Escrita", "Execução"]
 
         while True:
+            self.refresh.Fresh()
             print(f"Permissões para o aplicativo '{app.name}':")
             for i, permission in enumerate(permissions, start=1):
                 print(f"{i}. {permission}: {'Ativa' if app.permissions[permission] else 'Desativada'}")

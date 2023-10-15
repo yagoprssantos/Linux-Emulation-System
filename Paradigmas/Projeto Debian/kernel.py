@@ -1,4 +1,4 @@
-import time
+
 
 from loading import LoadingAnimation
 
@@ -28,14 +28,14 @@ class LinuxKernel:
         print("Inicializando o Kernel Linux", end='')
         LoadingAnimation(1)
         print(f"Kernel Linux {self.version} inicializado com sucesso.")
-        time.sleep(2)
+        
 
     def ShutdownKernel(self):
         # Desliga o Kernel do Linux.
         print("Desligando o Kernel Linux", end='')
         LoadingAnimation(1)
         print(f"Kernel Linux {self.version} desligado.")
-        time.sleep(2)
+        
 
 
 class LinuxKernelAPI:
@@ -43,4 +43,4 @@ class LinuxKernelAPI:
     def InteractWithKernel(self): 
         print("Interagindo com o Kernel do Linux", end='')
         LoadingAnimation(1)
-        time.sleep(1)
+        

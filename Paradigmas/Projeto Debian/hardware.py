@@ -1,4 +1,4 @@
-import time, random
+import random
 
 from loading import LoadingAnimation
 from kernel import LinuxKernelAPI
@@ -24,7 +24,7 @@ class Hardware(Machine):
         LinuxKernelAPI.InteractWithKernel()
         health_list = ["Péssimo", "Ruim", "Ok", "Bom", "Ótimo"] 
         print(f"Saúde do hardware: {random.choice(health_list)}!")
-        time.sleep(1)
+        
 
     def MonitorCPU(self, running_apps):
         # Monitora o uso da CPU.
@@ -37,7 +37,7 @@ class Hardware(Machine):
         else:
             self.cpu_usage = min(50 + 10 * (num_running_apps - 1), 100)  # CPU aumenta com base no número de aplicativos em execução.
         print(f"Uso da CPU: {self.cpu_usage}%")
-        time.sleep(1)
+        
 
     def ShowMemoryAllocations(self):
         # Mostra as memórias alocadas e seus endereços.

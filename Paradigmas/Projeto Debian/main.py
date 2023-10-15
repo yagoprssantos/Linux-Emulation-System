@@ -30,7 +30,7 @@ class Output:
         self.server.AddMachine(self.machine)
         
 
-        # Inicialização dos menus
+        #Inicialização dos menus
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:

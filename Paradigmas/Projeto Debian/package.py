@@ -1,4 +1,4 @@
-import time, random
+import random
 
 from loading import LoadingAnimation
 from repository import Repository
@@ -13,24 +13,24 @@ class Package(Repository):
         self.version = version
         self.installed = False
 
-    def install(self, reponame):
+    def install(self):
         # Instala o pacote de software
         if not self.installed:
-            print(f"Instalando {self.packname} do repositório {reponame}; Versão {self.version}", end='')
+            print(f"Instalando {self.packname} (Versão: {self.version}) do repositório {self.reponame}", end='')
             LoadingAnimation(1)
             self.installed = True
-            print(f"Pacote '{self.packname}' do repositório '{reponame}' instalado.\n")
+            print(f"Pacote {self.packname} (Versão: {self.version}) do repositório {self.reponame} instalado.\n")
         else:
-            print(f"Pacote '{self.packname}' do repositório '{reponame}' já está instalado.\n")
+            print(f"Pacote {self.packname} (Versão: {self.version}) do repositório {self.reponame} já está instalado.\n")
 
-    def uninstall(self, reponame):
+    def uninstall(self):
         # Desinstala o pacote de software
         if self.installed:
-            print(f"Desinstalando {self.packname} do repositório '{reponame}'; Versão {self.version}", end='')
+            print(f"Desinstalando {self.packname} (Versão: {self.version}) do repositório {self.reponame}", end='')
             LoadingAnimation(1)
-            time.sleep(2)
+            
             self.installed = False
-            print(f"Pacote '{self.packname}' do repositório '{reponame}' desinstalado.")
+            print(f"Pacote {self.packname} (Versão: {self.version}) do repositório {self.reponame} desinstalado.")
         else:
-            print(f"Pacote '{self.packname}' do repositório '{reponame}' não está instalado.")
+            print(f"Pacote {self.packname} (Versão: {self.version}) do repositório {self.reponame} não está instalado.")
 

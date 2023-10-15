@@ -1,4 +1,4 @@
-import time, random
+import random
 
 from loading import LoadingAnimation
 from kernel import LinuxKernel
@@ -16,21 +16,7 @@ class LinuxOperatingSystem:
         self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
         self.hardware = Hardware
         self.repositories = []
-
-    def DefaultRepo(self):
-        from repository import Repository
-        repo_data = [
-        ("Debian Repository 1", "http://debian-repo1.com"),
-        ("Debian Repository 2", "http://debian-repo2.com"),
-        ("Debian Repository 3", "http://debian-repo3.com")
-    ]
-        for i in range(len(repo_data)):
-            name, url = repo_data[i]
-            repo = Repository(name, url)
-            for _ in range(1):
-                repo.repo_pack_list.append(Package(f"Package-{random.randint(1, 100)}", round(random.uniform(1.0, 12.0), 1)))
-            self.repositories.append(repo)
-    
+ 
     def DefaultRepo(self):
         from repository import Repository
         repo_data = [
@@ -41,7 +27,7 @@ class LinuxOperatingSystem:
         for i in range(len(repo_data)):
             repo_name, repo_url = repo_data[i]
             repo = Repository(repo_name, repo_url)
-            for _ in range(1):
+            for _ in range(5):
                 pack_name = f"Package-{random.randint(1, 100)}"
                 pack_version = round(random.uniform(1.0, 12.0), 1)
                 repo.repo_pack_list.append(Package(repo_name, repo_url, pack_name, pack_version))
@@ -49,26 +35,26 @@ class LinuxOperatingSystem:
             
     def InstallDistro(self, name, defaultRepo=None):
         print(f"Instalando distribuição {name}", end='')
-        LoadingAnimation(3)
+        LoadingAnimation(1)
         print()
         
         if defaultRepo is None:
             defaultRepo = self.repositories
 
         for repository in defaultRepo:
-            repository.DownloadRepo(repository.reponame)
+            repository.DownloadRepo()
 
     def StartSystem(self):
         print("Ligando o Sistema Linux", end='')
         LoadingAnimation(1)
         self.kernel.InitializeKernel()
         print("Sistema Linux ligado.")
-        time.sleep(2)
+        
 
     def ShutdownSystem(self):
         print("Desligando o Sistema Linux", end='')
         LoadingAnimation(1)
         self.kernel.ShutdownKernel()
         print("Sistema Linux desligado.")
-        time.sleep(2)
+        
 
