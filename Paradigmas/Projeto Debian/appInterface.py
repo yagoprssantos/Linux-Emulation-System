@@ -3,7 +3,6 @@ from refresh import Refresh
 from application import *
 from hardware import *
 
-# TODO: Termine de implementar todas as funções
 
 class ApplicationInterface:
     def __init__(self):
@@ -17,14 +16,21 @@ class ApplicationInterface:
         self.installed_apps.append(new_app)
         print(f"O aplicativo '{app_name}' foi instalado com sucesso!\n")
 
-    def RemoveApplication(self, app_name):
-        for app in self.installed_apps:
-            if app.app_name == app_name:
-                self.installed_apps.remove(app)
-                print(f"O aplicativo '{app_name}' foi removido com sucesso!\n")
-                return
-        print(f"O aplicativo '{app_name}' não está instalado.\n")
-
+    def RemoveApplication(self, app_index):
+        app_name = self.installed_apps[app_index].name
+        app_version = self.installed_apps[app_index].version
+        app = next((app for app in self.installed_apps if app.name == app_name), None)
+        if app is None:
+            print(f"O aplicativo '{app_name}' não foi encontrado.")
+        elif app.running == True:
+            print(f"O aplicativo '{app_name}' está em execução.\nPare a execução do aplicativo para poder removê-lo.")
+            return
+        else:
+            print(f"Removendo o aplicativo '{app_name}' (Versão: {app_version})", end='')
+            LoadingAnimation(1)
+            self.installed_apps.remove(app)
+            print(f"\nAplicativo '{app_name}' removido com sucesso!")
+        
     def StartApplication(self, app_index):
         app_name = self.installed_apps[app_index].name
         app_version = self.installed_apps[app_index].version
@@ -33,6 +39,7 @@ class ApplicationInterface:
             print(f"O aplicativo '{app_name}' não foi encontrado.")        
         elif app.permissions["Execução"] == False:
             print(f"O aplicativo '{app_name}' não possui permissão de execução.")
+            return
         if app.running == True:
             print(f"O aplicativo '{app_name}' já está em execução.")
         else:

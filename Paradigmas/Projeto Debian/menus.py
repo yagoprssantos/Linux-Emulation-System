@@ -88,17 +88,16 @@ class AppMenu:
                 self.list.InstalledApps(self.app_interface.installed_apps)
                 input("\nPressione Enter para voltar ao menu...")
             elif choice == "2":
-                ConfigAppMenu().DisplayMenu()
+                ConfigAppMenu(self.app_interface).DisplayMenu()
             elif choice == "3":
                 break
-
             else:
                 print("Opção inválida. Tente novamente.")
 
 class ConfigAppMenu:
-    def __init__(self):
+    def __init__(self, app_interface):
         self.refresh = Refresh()
-        self.app_interface = ApplicationInterface()
+        self.app_interface = app_interface
         self.list = List()
 
     def DisplayMenu(self):
@@ -119,7 +118,7 @@ class ConfigAppMenu:
                     app_name = str(input("\nDigite o nome do aplicativo a ser instalado: "))
                     app_version = round(float(input("Digite a versão do aplicativo (float): ")), 1)
                     self.app_interface.AddApplication(app_name, app_version)
-                    if input("Deseja adicionar outro aplicativo? (S/N) ").upper() == "N":
+                    if input("Deseja adicionar outro aplicativo? (S/N) ").upper() == "N" or "NÃO" or "NAO":
                         break  
             elif choice == "2":
                 self.list.InstalledApps(self.app_interface.installed_apps)
