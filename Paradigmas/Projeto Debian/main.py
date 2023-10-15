@@ -27,10 +27,10 @@ class Output:
         self.kernel_api.InteractWithKernel()
 
         self.server.InitializeServer()
-        self.server.AddMachine(self.server_machine)
+        self.server.AddMachine(self.machine)
         
 
-        # Inicialização dos menus
+        #Inicialização dos menus
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:
@@ -38,7 +38,7 @@ class Output:
             elif choice == 2:
                 AppMenu().DisplayMenu()
             elif choice == 3:
-                RepositoryMenu().DisplayMenu()
+                RepositoryMenu(self.linuxOS).DisplayMenu()
             elif choice == 4:
                 if InfoMenu(self.machine, self.server, self.software_architecture).DisplayMenu():
                     continue

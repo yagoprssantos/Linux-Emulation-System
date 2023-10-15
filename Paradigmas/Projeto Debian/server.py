@@ -1,4 +1,4 @@
-import time
+
 
 
 class Server:
@@ -11,15 +11,15 @@ class Server:
     def InitializeServer(self):
         # Inicializa o servidor
         print(f"Servidor {self.server_type} no endereço {self.ip_address} inicializado.")
-        time.sleep(2)
+        
 
     def ShutdownServer(self):
         # Desliga o servidor.
         print(f"Servidor {self.server_type} no endereço {self.ip_address} desligado.")
-        time.sleep(2)
+        
 
     def AddMachine(self, machine):
         # Adiciona uma máquina ao servidor
         self.machines.append(machine)
         print(f"Máquina adicionada ao servidor no endereço {self.ip_address}.")
-        time.sleep(2)
+        

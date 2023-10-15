@@ -1,4 +1,4 @@
-import time
+
 from loading import LoadingAnimation
 
 # TODO: Fazer com que as funções de fato sejam efetivas e funcionais
@@ -23,7 +23,7 @@ class SoftwareArchitecture:
         print("Componentes definidos:")
         for component in self.components:
             print(f"- {component}")
-        time.sleep(1)
+        
 
     def DefineIntegrations(self):
         # Define integrações de software.
@@ -36,5 +36,5 @@ class SoftwareArchitecture:
         print("Integrações definidas:")
         for integration in self.integrations:
             print(f"- {integration}")
-        time.sleep(1)
+        
 

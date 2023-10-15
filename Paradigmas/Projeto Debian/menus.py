@@ -45,6 +45,30 @@ class HardwareMenu:
         return int(input("Escolha uma opção: "))
 
 
+class MemoryMenu:
+    def __init__(self):
+        self.hardware = Hardware()
+
+    def DisplayMenu(self):
+        while True:
+            print("\nMenu de Gerenciamento de Memória:")
+            print("1. Alocar memória")
+            print("2. Liberar memória")
+            print("3. Voltar ao menu de hardware")
+            choice = input("Escolha uma opção: ")
+
+            if choice == "1":
+                app_name = input("Digite o nome do aplicativo para alocar memória: ")
+                self.hardware.AllocateMemory(app_name)
+            elif choice == "2":
+                app_name = input("Digite o nome do aplicativo para liberar memória: ")
+                self.hardware.ReleaseMemory(app_name)
+            elif choice == "3":
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+ 
+
 class AppMenu:
     def __init__(self):
         self.refresh = Refresh()
@@ -92,37 +116,117 @@ class AppMenu:
 
 
 class RepositoryMenu:
-    def __init__(self, repositories=[]):
+    def __init__(self, linuxOS):
         self.refresh = Refresh()
-        self.repositories = repositories
-        self.repository = Repository()
-        
+        self.repositories = linuxOS.repositories
 
     def DisplayMenu(self):
-        self.refresh.Fresh()
-        print("\nMenu de Repositórios:")
-        print("1. Listar todos os repositórios e seus pacotes")
-        print("2. Configurar pacotes")
-        print("3. Voltar para menu principal")
-        choice = int(input("Escolha uma opção: "))
-
         while True:
+            self.refresh.Fresh()
+            print("\nMenu de Repositórios:")
+            print("1. Listar todos os repositórios e seus pacotes")
+            print("2. Configurar pacotes")
+            print("3. Voltar para menu principal")
+            choice = int(input("Escolha uma opção: "))
+
             if choice == 1:
-                self.repository.ListRepositories()
+                self.refresh.Fresh() 
+                for reponame in self.repositories:
+                    reponame.ListPackages()
+                input("Pressione Enter para voltar ao menu...")
             elif choice == 2:
-                pass
+                self.refresh.Fresh()
+                print("\nMenu de Repositórios:")
+                for i, repo in enumerate(self.repositories, start=1):
+                    print(f"{i}. {repo.reponame}")
+                print(f"{i+1}. Voltar para menu principal")
+                while True:
+                    choice = int(input("Escolha uma opção: "))
+
+                    if choice == i+1:
+                        break
+                    elif choice in range(1, i+1):
+                        repository = self.repositories[choice-1]
+                        PackageMenu(repository).DisplayMenu()
+                        break
+                    else:
+                        print("Opção inválida. Tente novamente.")
             elif choice == 3:
                 break  
             else:
                 print("Opção inválida. Tente novamente.")
+
+class PackageMenu:
+    def __init__(self, reponame):
+        self.refresh = Refresh()
+        self.reponame = reponame
+
+    def DisplayMenu(self):
+        while True:
+            self.refresh.Fresh()
+            print(f"\nMenu de Pacotes do repositório '{self.reponame.reponame}':")
+            print("1. Listar todos os pacotes")
+            print("2. Instalar pacotes")
+            print("3. Desinstalar pacotes")
+            print("4. Voltar para menu de repositórios")
             choice = int(input("Escolha uma opção: "))
+
+            if choice == 1:
+                self.refresh.Fresh()
+                self.reponame.ListPackages()
+                input("Pressione Enter para voltar ao menu...")
+                pass
+            elif choice == 2:
+                while True:
+                    self.refresh.Fresh()
+                    i = 0
+                    print("Pacotes disponíveis:")
+                    for package in self.reponame.repo_pack_list:
+                        print(f"{i+1}. {package.packname} // Versão: {package.version} // Instalado: {package.installed}")
+                        i += 1
+                    print(f"{i+1}. Voltar para menu de pacotes\n")
+                    choice = int(input("Escolha uma opção: "))
+                    print("\n")
+                    if choice == i+1:
+                        break
+                    elif choice in range(1, i+1):
+                        self.reponame.InstallPackage(self.reponame.repo_pack_list[choice-1].packname)
+                        input("\nPressione Enter para voltar ao menu...")
+                        break
+                    else:
+                        print("Opção inválida. Tente novamente.")
+            elif choice == 3:
+                self.refresh.Fresh()
+                while True:
+                    i = 0
+                    print("Pacotes disponíveis:")
+                    for package in self.reponame.repo_pack_list:
+                        print(f"{i+1}. {package.packname} // Versão: {package.version} // Instalado: {package.installed}")
+                        i += 1
+                    print(f"{i+1}. Voltar para menu de pacotes\n")
+                    choice = int(input("Escolha uma opção: "))
+                    print("\n")
+
+                    if choice == i+1:
+                        break
+                    elif choice in range(1, i+1):
+                        self.reponame.UninstallPackage(self.reponame.repo_pack_list[choice-1].packname)
+                        input("\nPressione Enter para voltar ao menu...")
+                        break
+                    else:
+                        print("Opção inválida. Tente novamente.")
+            elif choice == 4:
+                return
+            else:
+                print("Opção inválida. Tente novamente.")
+            
 
 
 class InfoMenu:
     def __init__(self, machine, server, software_architecture):
         self.refresh = Refresh()
         self.list = List()
-        self.machine = machine
+        self.hardware = Hardware()
         self.server = server
         self.software_architecture = software_architecture
 
@@ -137,36 +241,12 @@ class InfoMenu:
             choice = int(input("Escolha uma opção: "))
 
             if choice == 1:
-                self.list.MachineInfo(self.machine)
+                self.list.HardwareInfo(self.hardware)
             elif choice == 2:
                 self.list.ServerInfo(self.server)
             elif choice == 3:
                 self.list.ArchitectureInfo(self.software_architecture)
             elif choice == 4:
-                break
-            else:
-                print("Opção inválida. Tente novamente.")
-
-
-class MemoryMenu:
-    def __init__(self):
-        self.hardware = Hardware()
-
-    def DisplayMenu(self):
-        while True:
-            print("\nMenu de Gerenciamento de Memória:")
-            print("1. Alocar memória")
-            print("2. Liberar memória")
-            print("3. Voltar ao menu de hardware")
-            choice = input("Escolha uma opção: ")
-
-            if choice == "1":
-                app_name = input("Digite o nome do aplicativo para alocar memória: ")
-                self.hardware.AllocateMemory(app_name)
-            elif choice == "2":
-                app_name = input("Digite o nome do aplicativo para liberar memória: ")
-                self.hardware.ReleaseMemory(app_name)
-            elif choice == "3":
                 break
             else:
                 print("Opção inválida. Tente novamente.")

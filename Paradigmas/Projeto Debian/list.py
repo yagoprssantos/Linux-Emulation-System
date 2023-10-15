@@ -1,5 +1,6 @@
 from refresh import Refresh
 from appInterface import ApplicationInterface
+from hardware import Hardware
 
 # TODO: Analisar se todas as listas estão sendo usadas e funcionam corretamente
 
@@ -7,16 +8,17 @@ class List:
     def __init__(self):
         self.refresh = Refresh()
         self.apps = ApplicationInterface()
+        self.hardware = Hardware()
 
-    def MachineInfo(self, machine):
+    def HardwareInfo(self, hardware):
         self.refresh.Fresh()
         # Obtém informações sobre a máquina e imprime
         print("Informações da Máquina:")
-        print(f"Tipo: {machine.machine_type}")
-        print(f"Descrição: {machine.description}")
-        print(f"CPU: {machine.system_hardware.cpu}")
-        print(f"Memória: {machine.system_hardware.memory}")
-        print(f"Armazenamento: {machine.system_hardware.storage}")
+        print(f"Tipo: {hardware.machine_type}")
+        print(f"Descrição: {hardware.description}")
+        print(f"CPU: {hardware.cpu}")
+        print(f"Memória: {hardware.memory}")
+        print(f"Armazenamento: {hardware.storage}")
         if input("Pressione Enter para voltar ao menu...") == '':
             return
 
