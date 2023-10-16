@@ -1,6 +1,6 @@
 # Linux Emulation System
 
-![Project Logo](link-to-your-logo.png) <!-- Include a logo or relevant image -->
+![Banner](banner.png)
 
 ## Table of Contents
 
@@ -70,8 +70,7 @@ Contributions are welcome! If you'd like to improve the project, please fork the
 ## Author
 
 - [Yago Santos](https://github.com/yagoprssantos)
-  - Feel free to include your contact information and social media profiles.
- 
+
 
 ---
 
