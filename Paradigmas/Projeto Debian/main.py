@@ -21,9 +21,9 @@ class Output:
          
         self.refresh.Fresh()
 
-        self.linuxOS.DefaultRepo()
-        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
-        self.linuxOS.InstallDistro("Debian", defaultRepo)
+        # self.linuxOS.DefaultRepo()
+        # defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        # self.linuxOS.InstallDistro("Debian", defaultRepo)
         
         self.linuxOS.StartSystem()
 
@@ -40,7 +40,7 @@ class Output:
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:
-                HardwareMenu().DisplayMenu()
+                HardwareMenu(self.hardware).DisplayMenu()
             elif choice == 2:
                 AppMenu().DisplayMenu()
             elif choice == 3:

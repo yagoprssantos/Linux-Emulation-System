@@ -58,9 +58,6 @@ class List:
     def InstalledApps(self, installed_apps):
         self.refresh.Fresh()
         self.installed_apps = installed_apps
-
-        if self.installed_apps:
-            for index, app in enumerate(self.installed_apps):
-                print(f"{index + 1}. {app.name} (Versão: {app.version}, {'Em execução' if app.running else 'Parado'})")
-        else:
-            print("Nenhum aplicativo instalado.")
+        
+        for index, app in enumerate(self.installed_apps):
+            print(f"{index + 1}. {app.name} (Versão: {app.version}, {'Em execução' if app.running else 'Parado'})")

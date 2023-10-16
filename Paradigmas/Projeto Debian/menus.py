@@ -32,38 +32,75 @@ class MainMenu:
 
 
 class HardwareMenu:
-    def __init__(self):
+    def __init__(self, hardware):
         self.refresh = Refresh()
+        self.hardware = hardware
+        self.app_interface = ApplicationInterface()
 
     def DisplayMenu(self):
-        self.refresh.Fresh()
-        print("\nMenu de Hardware:")
-        print("1. Analisar Saúde")
-        print("2. Uso da CPU")
-        print("3. Memória")
-        print("4. Voltar para menu principal")
-        return int(input("Escolha uma opção: "))
+        while True:
+            self.refresh.Fresh()
+            print("\nMenu de Hardware:")
+            print("1. Verificar a Saúde")
+            print("2. Monitorar uso da CPU")
+            print("3. Gerenciar Memória")
+            print("4. Voltar para menu principal")
+            choice = int(input("Escolha uma opção: "))
+
+            if choice == 1:
+                self.hardware.CheckHealth()
+                input("\nPressione Enter para continuar...")
+            elif choice == 2:
+                self.hardware.MonitorCPU(self.app_interface.running_apps)
+                input("\nPressione Enter para continuar...")
+            elif choice == 3:
+                MemoryMenu().DisplayMenu()
+            elif choice == 4:
+                break
+            else:
+                print("Opção inválida. Tente novamente.")                
 
 
 class MemoryMenu:
     def __init__(self):
+        self.refresh = Refresh()
+        self.list = List()
         self.hardware = Hardware()
+        self.app_interface = ApplicationInterface()
 
     def DisplayMenu(self):
         while True:
+            self.refresh.Fresh()
             print("\nMenu de Gerenciamento de Memória:")
-            print("1. Alocar memória")
-            print("2. Liberar memória")
-            print("3. Voltar ao menu de hardware")
-            choice = input("Escolha uma opção: ")
+            print("1. Mostrar memórias alocadas")
+            print("2. Alocar memória")
+            print("3. Liberar memória")
+            print("4. Voltar ao menu de hardware")
+            choice = int(input("Escolha uma opção: "))
 
-            if choice == "1":
-                app_name = input("Digite o nome do aplicativo para alocar memória: ")
-                self.hardware.AllocateMemory(app_name)
-            elif choice == "2":
-                app_name = input("Digite o nome do aplicativo para liberar memória: ")
-                self.hardware.ReleaseMemory(app_name)
-            elif choice == "3":
+            if choice == 1:
+                self.hardware.ShowMemoryAllocations()
+                input("\nPressione Enter para continuar...")
+
+            elif choice == 2:
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    app_name = input("Digite o nome do aplicativo para alocar memória: ")
+                    self.hardware.AllocateMemory(app_name)
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
+
+            elif choice == 3:
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    app_name = input("Digite o nome do aplicativo para liberar memória: ")
+                    self.hardware.ReleaseMemory(app_name)
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
+
+            elif choice == 4:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
@@ -82,15 +119,23 @@ class AppMenu:
             print("1. Listar aplicativos instalados")
             print("2. Configurar aplicativos")
             print("3. Voltar para menu principal")
-            choice = input("Escolha uma opção: ")
+            choice = int(input("Escolha uma opção: "))
 
-            if choice == "1":
-                self.list.InstalledApps(self.app_interface.installed_apps)
-                input("\nPressione Enter para voltar ao menu...")
-            elif choice == "2":
+            if choice == 1:
+                self.refresh.Fresh()
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    input("\nPressione Enter para voltar ao menu...")
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
+
+            elif choice == 2:
                 ConfigAppMenu(self.app_interface).DisplayMenu()
-            elif choice == "3":
+
+            elif choice == 3:
                 break
+
             else:
                 print("Opção inválida. Tente novamente.")
 
@@ -110,40 +155,61 @@ class ConfigAppMenu:
             print("4. Parar aplicativo")
             print("5. Permissões do aplicativo")
             print("6. Voltar para menu de aplicativos")
-            choice = input("Escolha uma opção: ")
+            choice = int(input("Escolha uma opção: "))
             
-            if choice == "1":
+            if choice == 1:
                 self.refresh.Fresh()
                 while True:
                     app_name = str(input("\nDigite o nome do aplicativo a ser instalado: "))
                     app_version = round(float(input("Digite a versão do aplicativo (float): ")), 1)
                     self.app_interface.AddApplication(app_name, app_version)
-                    if input("Deseja adicionar outro aplicativo? (S/N) ").upper() == "N" or "NÃO" or "NAO":
-                        break  
-            elif choice == "2":
-                self.list.InstalledApps(self.app_interface.installed_apps)
-                index = int(input("\nDigite o índice do aplicativo a ser desinstalado: ")) - 1
-                self.app_interface.RemoveApplication(index)
-                input("\nPressione Enter para voltar ao menu...")
+                    if input("Deseja adicionar outro aplicativo? (S/N) ").upper() in ["N", "NÃO", "NAO", ""]:
+                        break
 
-            elif choice == "3":
-                self.list.InstalledApps(self.app_interface.installed_apps)
-                index = int(input("\nDigite o índice do aplicativo a ser iniciado: ")) - 1
-                self.app_interface.StartApplication(index)
-                input("\nPressione Enter para voltar ao menu...")
+            elif choice == 2:
+                self.refresh.Fresh()
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    index = int(input("\nDigite o índice do aplicativo a ser desinstalado: ")) - 1
+                    self.app_interface.RemoveApplication(index)
+                    input("\nPressione Enter para voltar ao menu...")
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
 
-            elif choice == "4":
-                self.list.InstalledApps(self.app_interface.installed_apps)
-                index = int(input("\nDigite o índice do aplicativo a ser parado: ")) - 1
-                self.app_interface.StopApplication(index)
-                input("\nPressione Enter para voltar ao menu...")
+            elif choice == 3:
+                self.refresh.Fresh()
+                if self.app_interface.installed_apps: 
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    index = int(input("\nDigite o índice do aplicativo a ser iniciado: ")) - 1
+                    self.app_interface.StartApplication(index)
+                    input("\nPressione Enter para voltar ao menu...")
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
 
-            elif choice == "5":
-                self.list.InstalledApps(self.app_interface.installed_apps)
-                index = int(input("\nDigite o índice do aplicativo para gerenciar permissões: ")) - 1
-                self.app_interface.ManagePermissions(index)
+            elif choice == 4:
+                self.refresh.Fresh()
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    index = int(input("\nDigite o índice do aplicativo a ser parado: ")) - 1
+                    self.app_interface.StopApplication(index)
+                    input("\nPressione Enter para voltar ao menu...")
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
 
-            elif choice == "6":
+            elif choice == 5:
+                self.refresh.Fresh()
+                if self.app_interface.installed_apps:
+                    self.list.InstalledApps(self.app_interface.installed_apps)
+                    index = int(input("\nDigite o índice do aplicativo para gerenciar permissões: ")) - 1
+                    self.app_interface.ManagePermissions(index)
+                else:
+                    print("Nenhum aplicativo instalado.")
+                    input("\nPressione Enter para voltar ao menu...")
+
+            elif choice == 6:
                 break
 
             else:
@@ -168,6 +234,7 @@ class RepositoryMenu:
                 for reponame in self.repositories:
                     reponame.ListPackages()
                 input("Pressione Enter para voltar ao menu...")
+
             elif choice == 2:
                 self.refresh.Fresh()
                 print("\nMenu de Repositórios:")
@@ -185,8 +252,10 @@ class RepositoryMenu:
                         break
                     else:
                         print("Opção inválida. Tente novamente.")
+
             elif choice == 3:
                 break  
+
             else:
                 print("Opção inválida. Tente novamente.")
 
@@ -209,7 +278,7 @@ class PackageMenu:
                 self.refresh.Fresh()
                 self.reponame.ListPackages()
                 input("Pressione Enter para voltar ao menu...")
-                pass
+
             elif choice == 2:
                 while True:
                     self.refresh.Fresh()
@@ -229,6 +298,7 @@ class PackageMenu:
                         break
                     else:
                         print("Opção inválida. Tente novamente.")
+            
             elif choice == 3:
                 self.refresh.Fresh()
                 while True:
@@ -249,12 +319,13 @@ class PackageMenu:
                         break
                     else:
                         print("Opção inválida. Tente novamente.")
+            
             elif choice == 4:
                 return
+            
             else:
                 print("Opção inválida. Tente novamente.")
             
-
 
 class InfoMenu:
     def __init__(self, hardware, server, architecture):
@@ -277,11 +348,16 @@ class InfoMenu:
 
             if choice == 1:
                 self.list.HardwareInfo(self.hardware)
+            
             elif choice == 2:
                 self.list.ServerInfo(self.server)
+            
             elif choice == 3:
                 self.list.ArchitectureInfo(self.architecture)
+            
             elif choice == 4:
                 break
+            
             else:
                 print("Opção inválida. Tente novamente.")
+
