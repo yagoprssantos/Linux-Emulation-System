@@ -73,9 +73,8 @@ class MemoryMenu:
             self.refresh.Fresh()
             print("\nMenu de Gerenciamento de Memória:")
             print("1. Mostrar memórias alocadas")
-            print("2. Alocar memória")
-            print("3. Liberar memória")
-            print("4. Voltar ao menu de hardware")
+            print("2. Liberar memória")
+            print("3. Voltar ao menu de hardware")
             choice = int(input("Escolha uma opção: "))
 
             if choice == 1:
@@ -86,23 +85,14 @@ class MemoryMenu:
                 self.refresh.Fresh()
                 if self.app_interface.installed_apps:
                     self.list.InstalledApps(self.app_interface.installed_apps)
-                    app_name = input("Digite o nome do aplicativo para alocar memória: ")
-                    self.hardware.AllocateMemory(app_name)
+                    index = int(input("\nDigite o índice do aplicativo para liberar memória: ")) - 1
+                    self.app_interface.StopApplication(index)
+                    input("Memória liberada.\nPressione Enter para voltar ao menu...")
                 else:
-                    print("Nenhum aplicativo instalado.")
+                    print("Nenhum aplicativo instalado. ")
                     input("\nPressione Enter para voltar ao menu...")
 
             elif choice == 3:
-                self.refresh.Fresh()
-                if self.app_interface.installed_apps:
-                    self.list.InstalledApps(self.app_interface.installed_apps)
-                    app_name = input("Digite o nome do aplicativo para liberar memória: ")
-                    self.hardware.ReleaseMemory(app_name)
-                else:
-                    print("Nenhum aplicativo instalado.")
-                    input("\nPressione Enter para voltar ao menu...")
-
-            elif choice == 4:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
