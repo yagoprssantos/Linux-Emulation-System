@@ -8,23 +8,26 @@ class Output:
     def __init__(self):
         self.lists = List()
         self.refresh = Refresh()
-        self.linuxOS = LinuxOperatingSystem("Debian 12")
-        self.server = Server("Web Server", "192.168.1.1")
+        self.linuxOS = LinuxOperatingSystem()
+        self.server = Server()
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
-        self.software_architecture = SoftwareArchitecture("Monolithic", "Descrição")
+        self.architecture = SoftwareArchitecture()
         self.kernel_api = LinuxKernelAPI()
 
     def Run(self):
          
         self.refresh.Fresh()
 
-        self.linuxOS.DefaultRepo()
-        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
-        self.linuxOS.InstallDistro("Debian", defaultRepo)
+        # self.linuxOS.DefaultRepo()
+        # defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        # self.linuxOS.InstallDistro("Debian", defaultRepo)
         
         self.linuxOS.StartSystem()
 
         self.kernel_api.InteractWithKernel()
+
+        self.architecture.DefineComponents()
+        self.architecture.DefineIntegrations()
 
         self.server.InitializeServer()
         self.server.AddMachine(self.machine)
@@ -40,7 +43,7 @@ class Output:
             elif choice == 3:
                 RepositoryMenu(self.linuxOS).DisplayMenu()
             elif choice == 4:
-                if InfoMenu(self.machine, self.server, self.software_architecture).DisplayMenu():
+                if InfoMenu().DisplayMenu():
                     continue
             elif choice == 5:
                 self.refresh.Fresh()

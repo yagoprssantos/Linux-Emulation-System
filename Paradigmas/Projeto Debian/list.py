@@ -7,8 +7,6 @@ from hardware import Hardware
 class List:
     def __init__(self):
         self.refresh = Refresh()
-        self.apps = ApplicationInterface()
-        self.hardware = Hardware()
 
     def HardwareInfo(self, hardware):
         self.refresh.Fresh()

@@ -257,12 +257,12 @@ class PackageMenu:
 
 
 class InfoMenu:
-    def __init__(self, machine, server, software_architecture):
+    def __init__(self):
         self.refresh = Refresh()
         self.list = List()
         self.hardware = Hardware()
-        self.server = server
-        self.software_architecture = software_architecture
+        self.server = Server()
+        self.architecture = SoftwareArchitecture()
 
     def DisplayMenu(self):
         while True:
@@ -279,7 +279,7 @@ class InfoMenu:
             elif choice == 2:
                 self.list.ServerInfo(self.server)
             elif choice == 3:
-                self.list.ArchitectureInfo(self.software_architecture)
+                self.list.ArchitectureInfo(self.architecture)
             elif choice == 4:
                 break
             else:

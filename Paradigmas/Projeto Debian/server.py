@@ -3,7 +3,7 @@
 
 class Server:
     # Classe que fornece serviços a outras máquinas na rede
-    def __init__(self, server_type, ip_address):
+    def __init__(self, server_type="Web Server", ip_address="192.168.1.1"):
         self.server_type = server_type
         self.ip_address = ip_address
         self.machines = []
