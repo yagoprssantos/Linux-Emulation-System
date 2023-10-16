@@ -40,8 +40,6 @@ class List:
         self.refresh.Fresh()
         self.architecture = architecture
 
-        print(self.architecture.components)
-        print(self.architecture.integrations)
         # Obtém informações sobre a arquitetura de software e imprime
         print("Informações da Arquitetura de Software:")
         print(f"Tipo: {self.architecture.software_type}")

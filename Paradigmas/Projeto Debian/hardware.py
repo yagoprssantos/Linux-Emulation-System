@@ -9,7 +9,7 @@ from machine import Machine
 
 class Hardware(Machine):
     # Classe que representa os componentes de hardware de uma máquina.
-    def __init__(self,  machine_type="Físico", description="Samsung",  cpu="Intel i7", memory="16GB", storage="1TB SSD"):
+    def __init__(self, machine_type, description,  cpu, memory, storage):
         # Inicializa os componentes de hardware: CPU, memória e armazenamento.
         super().__init__(machine_type, description)
         self.refresh = Refresh()

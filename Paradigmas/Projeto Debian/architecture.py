@@ -4,7 +4,7 @@ from loading import LoadingAnimation
 
 class SoftwareArchitecture:
     # Classe que define a estrutura e integrações dos componentes de software.
-    def __init__(self, software_type="Monolítica", description="Arquitetura de software monolítica"):
+    def __init__(self, software_type, description):
         # Inicializa a arquitetura de software com um tipo específico e descrição.
         self.software_type = software_type
         self.description = description

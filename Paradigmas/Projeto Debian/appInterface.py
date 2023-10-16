@@ -5,12 +5,12 @@ from hardware import *
 
 
 class ApplicationInterface:
-    def __init__(self):
+    def __init__(self, hardware):
         self.refresh = Refresh()
         self.installed_apps = []
         self.running_apps = []
-        self.hardware = Hardware()
-
+        self.hardware = hardware
+        
     def AddApplication(self, app_name, app_version):
         new_app = Application(app_name, app_version)
         self.installed_apps.append(new_app)

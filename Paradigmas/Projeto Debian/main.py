@@ -9,12 +9,13 @@ class Output:
         self.refresh = Refresh()
         self.lists = List()
 
-        self.hardware = Hardware()
-        self.architecture = SoftwareArchitecture()
-        self.server = Server()
-        self.app_interface = ApplicationInterface()
+        self.hardware = Hardware("Físico", "Samsung", "Intel i7", "16GB", "1TB SSD")
+        self.architecture = SoftwareArchitecture("Monolítica", "Arquitetura de software monolítica")
+        self.server = Server("Web Server", "192.168.1.1")
+        self.app_interface = ApplicationInterface(self.hardware)
+        self.kernel = LinuxKernel("5.10.0-8-amd64")
 
-        self.linuxOS = LinuxOperatingSystem()
+        self.linuxOS = LinuxOperatingSystem("Debian 12", self.kernel, self.architecture, self.hardware)
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.kernel_api = LinuxKernelAPI()
 
@@ -22,9 +23,9 @@ class Output:
          
         self.refresh.Fresh()
 
-        # self.linuxOS.DefaultRepo()
-        # defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
-        # self.linuxOS.InstallDistro("Debian", defaultRepo)
+        self.linuxOS.DefaultRepo()
+        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        self.linuxOS.InstallDistro("Debian", defaultRepo)
         
         self.linuxOS.StartSystem()
 
