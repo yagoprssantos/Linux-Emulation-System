@@ -12,6 +12,7 @@ class Output:
         self.hardware = Hardware()
         self.architecture = SoftwareArchitecture()
         self.server = Server()
+        self.app_interface = ApplicationInterface()
 
         self.linuxOS = LinuxOperatingSystem()
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
@@ -40,9 +41,9 @@ class Output:
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:
-                HardwareMenu(self.hardware).DisplayMenu()
+                HardwareMenu(self.hardware, self.app_interface).DisplayMenu()
             elif choice == 2:
-                AppMenu().DisplayMenu()
+                AppMenu(self.app_interface).DisplayMenu()
             elif choice == 3:
                 RepositoryMenu(self.linuxOS).DisplayMenu()
             elif choice == 4:

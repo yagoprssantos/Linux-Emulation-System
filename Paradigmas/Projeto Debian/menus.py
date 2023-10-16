@@ -32,10 +32,10 @@ class MainMenu:
 
 
 class HardwareMenu:
-    def __init__(self, hardware):
+    def __init__(self, hardware, app_interface):
         self.refresh = Refresh()
         self.hardware = hardware
-        self.app_interface = ApplicationInterface()
+        self.app_interface = app_interface
 
     def DisplayMenu(self):
         while True:
@@ -54,7 +54,7 @@ class HardwareMenu:
                 self.hardware.MonitorCPU(self.app_interface.running_apps)
                 input("\nPressione Enter para continuar...")
             elif choice == 3:
-                MemoryMenu().DisplayMenu()
+                MemoryMenu(self.hardware, self.app_interface).DisplayMenu()
             elif choice == 4:
                 break
             else:
@@ -62,11 +62,11 @@ class HardwareMenu:
 
 
 class MemoryMenu:
-    def __init__(self):
+    def __init__(self, hardware, app_interface):
         self.refresh = Refresh()
         self.list = List()
-        self.hardware = Hardware()
-        self.app_interface = ApplicationInterface()
+        self.hardware = hardware
+        self.app_interface = app_interface
 
     def DisplayMenu(self):
         while True:
@@ -83,6 +83,7 @@ class MemoryMenu:
                 input("\nPressione Enter para continuar...")
 
             elif choice == 2:
+                self.refresh.Fresh()
                 if self.app_interface.installed_apps:
                     self.list.InstalledApps(self.app_interface.installed_apps)
                     app_name = input("Digite o nome do aplicativo para alocar memória: ")
@@ -92,6 +93,7 @@ class MemoryMenu:
                     input("\nPressione Enter para voltar ao menu...")
 
             elif choice == 3:
+                self.refresh.Fresh()
                 if self.app_interface.installed_apps:
                     self.list.InstalledApps(self.app_interface.installed_apps)
                     app_name = input("Digite o nome do aplicativo para liberar memória: ")
@@ -107,10 +109,10 @@ class MemoryMenu:
  
 
 class AppMenu:
-    def __init__(self):
+    def __init__(self, app_interface):
         self.refresh = Refresh()
         self.list = List()
-        self.app_interface = ApplicationInterface()
+        self.app_interface = app_interface
 
     def DisplayMenu(self):
         while True:
