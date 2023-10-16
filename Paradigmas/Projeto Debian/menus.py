@@ -72,8 +72,8 @@ class MemoryMenu:
 class AppMenu:
     def __init__(self):
         self.refresh = Refresh()
-        self.app_interface = ApplicationInterface()
         self.list = List()
+        self.app_interface = ApplicationInterface()
 
     def DisplayMenu(self):
         while True:
@@ -97,8 +97,8 @@ class AppMenu:
 class ConfigAppMenu:
     def __init__(self, app_interface):
         self.refresh = Refresh()
-        self.app_interface = app_interface
         self.list = List()
+        self.app_interface = app_interface
 
     def DisplayMenu(self):
         while True:
@@ -257,12 +257,12 @@ class PackageMenu:
 
 
 class InfoMenu:
-    def __init__(self):
+    def __init__(self, hardware, server, architecture):
         self.refresh = Refresh()
         self.list = List()
-        self.hardware = Hardware()
-        self.server = Server()
-        self.architecture = SoftwareArchitecture()
+        self.hardware = hardware
+        self.server = server
+        self.architecture = architecture
 
     def DisplayMenu(self):
         while True:
@@ -272,6 +272,7 @@ class InfoMenu:
             print("2. Servidor")
             print("3. Arquitetura de Software")
             print("4. Voltar para menu principal")
+
             choice = int(input("Escolha uma opção: "))
 
             if choice == 1:

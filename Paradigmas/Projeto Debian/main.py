@@ -6,21 +6,24 @@ from list import *
 
 class Output:
     def __init__(self):
-        self.lists = List()
         self.refresh = Refresh()
-        self.linuxOS = LinuxOperatingSystem()
-        self.server = Server()
-        self.machine = Machine("Virtual", "VMWare Virtual Machine")
+        self.lists = List()
+
+        self.hardware = Hardware()
         self.architecture = SoftwareArchitecture()
+        self.server = Server()
+
+        self.linuxOS = LinuxOperatingSystem()
+        self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.kernel_api = LinuxKernelAPI()
 
     def Run(self):
          
         self.refresh.Fresh()
 
-        # self.linuxOS.DefaultRepo()
-        # defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
-        # self.linuxOS.InstallDistro("Debian", defaultRepo)
+        self.linuxOS.DefaultRepo()
+        defaultRepo =  [self.linuxOS.repositories[0], self.linuxOS.repositories[1]]
+        self.linuxOS.InstallDistro("Debian", defaultRepo)
         
         self.linuxOS.StartSystem()
 
@@ -28,7 +31,7 @@ class Output:
 
         self.architecture.DefineComponents()
         self.architecture.DefineIntegrations()
-
+        
         self.server.InitializeServer()
         self.server.AddMachine(self.machine)
         
@@ -43,7 +46,7 @@ class Output:
             elif choice == 3:
                 RepositoryMenu(self.linuxOS).DisplayMenu()
             elif choice == 4:
-                if InfoMenu().DisplayMenu():
+                if InfoMenu(self.hardware, self.server, self.architecture).DisplayMenu():
                     continue
             elif choice == 5:
                 self.refresh.Fresh()
