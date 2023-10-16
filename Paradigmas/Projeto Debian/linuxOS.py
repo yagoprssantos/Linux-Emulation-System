@@ -9,11 +9,11 @@ from hardware import Hardware
 
 class LinuxOperatingSystem:
     # Classe que coordena e gerencia todas as operações do sistema.
-    def __init__(self, version):
+    def __init__(self, version="Debian 12"):
         # Inicializa o sistema operacional Linux com uma versão específica.
         self.version = version
         self.kernel = LinuxKernel("4.0")
-        self.architecture = SoftwareArchitecture("Monolítica", "Descrição de Exemplo")
+        self.architecture = SoftwareArchitecture()
         self.hardware = Hardware
         self.repositories = []
  
