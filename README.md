@@ -1,79 +1,77 @@
-# Linux Emulation System
+# Sistema de Emulação Linux
 
 ![Banner](banner.png)
 
-## Table of Contents
+## Tabela de Conteúdos
 
-- [Description](#description)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+- [Descrição](#descrição)
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Funcionalidades](#funcionalidades)
+- [Começando](#começando)
+- [Contribuindo](#contribuindo)
+- [Licença](#licença)
+- [Agradecimentos](#agradecimentos)
 
-## Introduction
+## Introdução
 
-The Linux Emulation System is a comprehensive educational tool that emulates a simplified Linux environment. It provides users with a hands-on experience in working with hardware, software, and networking components in a controlled, simulated environment.
+O Sistema de Emulação Linux é uma ferramenta educacional abrangente que emula um ambiente Linux simplificado. Ele fornece aos usuários uma experiência prática em trabalhar com componentes de hardware, software e rede em um ambiente simulado e controlado.
 
-Whether you are an aspiring system administrator, developer, or simply curious about how Linux works, this emulation system offers a risk-free way to explore and experiment with various aspects of a Linux system.
+Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesmente curioso sobre como o Linux funciona, este sistema de emulação oferece uma maneira segura de explorar e experimentar vários aspectos de um sistema Linux.
 
-## Features
+## Funcionalidades
 
-- **Hardware Emulation**: Experience the functionalities of a virtual machine with components like CPU, memory, and storage.
+- **Emulação de Hardware**: Experimente as funcionalidades de uma máquina virtual com componentes como CPU, memória e armazenamento.
 
-- **Software Components**: Interact with a Linux-like operating system, including kernel and software architecture.
+- **Componentes de Software**: Interaja com um sistema operacional semelhante ao Linux, incluindo kernel e arquitetura de software.
 
-- **Package Management**: Simulate a software repository system with the ability to install and uninstall packages.
+- **Gerenciamento de Pacotes**: Simule um sistema de repositório de software com a capacidade de instalar e desinstalar pacotes.
 
-- **User-Friendly Interface**: Utilize an intuitive menu-driven interface that makes the system accessible to users of all levels.
+- **Interface Amigável**: Utilize uma interface intuitiva baseada em menus que torna o sistema acessível a usuários de todos os níveis.
 
-## Project Structure
+## Estrutura do Projeto
 
-- **main.py**: The main entry point for launching the emulation system.
+- **main.py**: O ponto de entrada principal para iniciar o sistema de emulação.
 
-- **loading.py**: Module containing functions for loading animations.
+- **loading.py**: Módulo contendo funções para animações de carregamento.
 
-- **menus.py**: Definition of various menus for user interaction.
+- **menus.py**: Definição de vários menus para interação do usuário.
 
-- **machine.py**: Implementation of the `Machine` class, which represents the virtual hardware.
+- **machine.py**: Implementação da classe `Machine`, que representa o hardware virtual.
 
-- **linuxOS.py**: Simulated Linux operating system with relevant functions.
+- **linuxOS.py**: Sistema operacional Linux simulado com funções relevantes.
 
-- **kernel.py**: Defines the `LinuxKernelAPI` for kernel interactions.
+- **kernel.py**: Define a `LinuxKernelAPI` para interações do kernel.
 
-- **appInterface.py**: Provides an emulation of the application interface and management.
+- **appInterface.py**: Fornece uma emulação da interface e gerenciamento de aplicativos.
 
-- **package.py**: Defines the `Package` class for software packages in the system.
+- **package.py**: Define a classe `Package` para pacotes de software no sistema.
 
-- **refresh.py**: Console clearing functionality provided by the `Refresh` class.
+- **refresh.py**: Funcionalidade de limpeza do console fornecida pela classe `Refresh`.
 
-- **server.py**: Represents a server for networking simulations.
+- **server.py**: Representa um servidor para simulações de rede.
 
-## Usage
+## Uso
 
-1. Clone the repository: `git clone https://github.com/your-username/your-project.git`
-2. Navigate to the project directory: `cd your-project`
-3. Run `main.py` to launch the emulation system.
-4. Use the menu-driven interface to interact with the simulation.
+1. Clone o repositório: `git clone https://github.com/your-username/your-project.git`
+2. Navegue até o diretório do projeto: `cd your-project`
+3. Execute `main.py` para iniciar o sistema de emulação.
+4. Use a interface baseada em menus para interagir com a simulação.
 
-## Additional Notes
+## Notas Adicionais
 
-- This emulation system is intended for educational and demonstration purposes only.
-- Please note that this is a simulated environment and not suitable for real-world use.
+- Este sistema de emulação destina-se apenas a fins educacionais e de demonstração.
+- Observe que este é um ambiente simulado e não adequado para uso no mundo real.
 
-## Contributing
+## Contribuindo
 
-Contributions are welcome! If you'd like to improve the project, please fork the repository and create a pull request. You can also open issues for bug reports or feature requests.
+Contribuições são bem-vindas! Se você deseja melhorar o projeto, faça um fork do repositório e crie uma solicitação de pull. Você também pode abrir problemas para relatórios de bugs ou solicitações de recursos.
 
-## Author
+## Autor
 
 - [Yago Santos](https://github.com/yagoprssantos)
 
 
 ---
 
-**Enjoy your Linux emulation journey!**
-
-
+**Aproveite sua jornada de emulação Linux!**
