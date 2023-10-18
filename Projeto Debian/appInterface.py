@@ -5,18 +5,59 @@ from hardware import *
 
 
 class ApplicationInterface:
-    def __init__(self):
+    """
+    Classe que representa a interface de aplicativos do sistema.
+
+    Atributos:
+    - refresh: objeto da classe Refresh responsável por atualizar a tela da interface
+    - installed_apps: lista de objetos da classe Application representando os aplicativos instalados
+    - running_apps: lista de strings com os nomes dos aplicativos em execução
+    - hardware: objeto da classe Hardware representando o hardware do sistema
+
+    Métodos:
+    - AddApplication: adiciona um novo aplicativo à lista de aplicativos instalados
+    - RemoveApplication: remove um aplicativo da lista de aplicativos instalados
+    - StartApplication: inicia a execução de um aplicativo
+    - StopApplication: para a execução de um aplicativo
+    - ManagePermissions: gerencia as permissões de um aplicativo
+    """
+
+    def __init__(self, hardware):
+        """
+        Construtor da classe ApplicationInterface.
+
+        Parâmetros:
+        - hardware (Hardware): objeto da classe Hardware representando o hardware do sistema
+        """
+        
         self.refresh = Refresh()
         self.installed_apps = []
         self.running_apps = []
-        self.hardware = Hardware()
+        self.hardware = hardware
+
 
     def AddApplication(self, app_name, app_version):
+        """
+        Adiciona um novo aplicativo à lista de aplicativos instalados.
+
+        Parâmetros:
+        - app_name: string com o nome do aplicativo
+        - app_version: string com a versão do aplicativo
+        """
+
         new_app = Application(app_name, app_version)
         self.installed_apps.append(new_app)
         print(f"O aplicativo '{app_name}' foi instalado com sucesso!\n")
 
+
     def RemoveApplication(self, app_index):
+        """
+        Remove um aplicativo da lista de aplicativos instalados.
+
+        Parâmetros:
+        - app_index: índice do aplicativo na lista de aplicativos instalados
+        """
+
         app_name = self.installed_apps[app_index].name
         app_version = self.installed_apps[app_index].version
         app = next((app for app in self.installed_apps if app.name == app_name), None)
@@ -31,7 +72,15 @@ class ApplicationInterface:
             self.installed_apps.remove(app)
             print(f"\nAplicativo '{app_name}' removido com sucesso!")
         
+
     def StartApplication(self, app_index):
+        """
+        Inicia a execução de um aplicativo.
+
+        Parâmetros:
+        - app_index: índice do aplicativo na lista de aplicativos instalados
+        """
+        
         app_name = self.installed_apps[app_index].name
         app_version = self.installed_apps[app_index].version
         app = next((app for app in self.installed_apps if app.name == app_name), None)
@@ -50,7 +99,15 @@ class ApplicationInterface:
             self.running_apps.append(app_name)
             print(f"\nAplicativo '{app_name}' iniciado com sucesso!")
 
+
     def StopApplication(self, app_index):
+        """
+        Para a execução de um aplicativo.
+
+        Parâmetros:
+        - app_index: índice do aplicativo na lista de aplicativos instalados
+        """
+
         app_name = self.installed_apps[app_index].name
         app_version = self.installed_apps[app_index].version
         app = next((app for app in self.installed_apps if app.name == app_name), None)
@@ -66,7 +123,15 @@ class ApplicationInterface:
             self.running_apps.remove(app_name)
             print(f"\nAplicativo '{app_name}' parado com sucesso!")
 
+
     def ManagePermissions(self, app_index):
+        """
+        Gerencia as permissões de um aplicativo.
+
+        Parâmetros:
+        - app_index: índice do aplicativo na lista de aplicativos instalados
+        """
+
         app = self.installed_apps[app_index]
         permissions = ["Leitura", "Escrita", "Execução"]
 
@@ -96,3 +161,4 @@ class ApplicationInterface:
                     print("Opção inválida. Tente novamente.")
             else:
                 print("Opção inválida. Tente novamente.")
+

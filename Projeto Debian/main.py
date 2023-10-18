@@ -9,11 +9,13 @@ class Output:
         self.refresh = Refresh()
         self.lists = List()
 
-        self.hardware = Hardware()
-        self.architecture = SoftwareArchitecture()
-        self.server = Server()
+        self.hardware = Hardware("Físico", "Samsung", "Intel i7", "16GB", "1TB SSD")
+        self.architecture = SoftwareArchitecture("Monolítica", "Arquitetura de software monolítica")
+        self.server = Server("Web Server", "192.168.1.1")
+        self.app_interface = ApplicationInterface(self.hardware)
+        self.kernel = LinuxKernel("5.10.0-8-amd64")
 
-        self.linuxOS = LinuxOperatingSystem()
+        self.linuxOS = LinuxOperatingSystem("Debian 12", self.kernel, self.architecture, self.hardware)
         self.machine = Machine("Virtual", "VMWare Virtual Machine")
         self.kernel_api = LinuxKernelAPI()
 
@@ -40,9 +42,9 @@ class Output:
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:
-                HardwareMenu().DisplayMenu()
+                HardwareMenu(self.hardware, self.app_interface).DisplayMenu()
             elif choice == 2:
-                AppMenu().DisplayMenu()
+                AppMenu(self.app_interface).DisplayMenu()
             elif choice == 3:
                 RepositoryMenu(self.linuxOS).DisplayMenu()
             elif choice == 4:
