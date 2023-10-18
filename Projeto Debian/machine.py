@@ -1,9 +1,23 @@
-
-# TODO: APAGAR classe Machine e juntar com outras funções menores
-
 class Machine:
-    # Classe que representa uma máquina física ou virtual.
+    """
+    Classe que representa uma máquina.
+
+    Atributos:
+    - machine_type (str): Tipo de máquina.
+    - description (str): Descrição da máquina.
+
+    Métodos:
+    - Nenhum    
+    """
+
     def __init__(self, machine_type, description):
-        # Inicializa uma máquina com um tipo e descrição específicos.
+        """
+        Construtor da classe Machine.
+
+        Parâmetros:
+        - machine_type (str): Tipo de máquina.
+        - description (str): Descrição da máquina.
+        """
+
         self.machine_type = machine_type
         self.description = description

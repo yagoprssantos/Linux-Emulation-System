@@ -1,5 +1,3 @@
-
-
 from loading import LoadingAnimation
 
 

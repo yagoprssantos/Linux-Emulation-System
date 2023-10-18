@@ -2,7 +2,9 @@ from loading import *
 from menus import *
 from list import *
 
-# Existem TODOs pelo código. Abra os arquivos e vá encontrando-os :)
+"""
+
+"""
 
 class Output:
     def __init__(self):

@@ -1,15 +1,28 @@
 import os, platform
 
-# TODO: APAGAR classe Refresh e juntar Fresh com outras funções menores
 
 class Refresh:
-    def __init__(self):
-        pass
+    """
+    Classe que faz uma limpa no terminal
+
+    Atributos:
+    - Nenhum.
+
+    Métodos:
+    - Fresh(): Limpa o terminal.
+    """
 
     def Fresh(self):
-        # Classe que faz uma limpa no terminal
+        """
+        Faz uma limpa no terminal.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         if platform.system() == 'Windows':
             os.system('cls')
         else:
             os.system('clear')
         print("!! Isto é apenas uma simulação !!\n")
+

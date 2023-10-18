@@ -8,13 +8,40 @@ from refresh import *
 from server import *
 from repository import Repository
 
-
+"""
+Este arquivo existe excepcionalmente para organizar o código.
+"""
 
 class MainMenu:
+    """
+    Classe que representa o menu principal do sistema.
+
+    Atributos:
+    - Nenhum.
+
+    Métodos:
+    - DisplayMenu: mostra o menu principal do sistema
+    """
+    
     def __init__(self):
+        """
+        Construtor da classe MainMenu.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         self.refresh = Refresh()
 
+
     def DisplayMenu(self):
+        """
+        Mostra o menu principal do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         self.refresh.Fresh()
         print("\nMenu Principal:")
         print("1. Analisar Hardware")
@@ -26,12 +53,39 @@ class MainMenu:
 
 
 class HardwareMenu:
+    """
+    Classe que representa o menu de hardware do sistema.
+
+    Atributos:
+    - hardware: objeto da classe Hardware representando o hardware do sistema
+    - app_interface: objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+
+    Métodos:
+    - DisplayMenu: mostra o menu de hardware do sistema
+    """
+    
     def __init__(self, hardware, app_interface):
+        """
+        Construtor da classe HardwareMenu.
+
+        Parâmetros:
+        - hardware (Hardware): objeto da classe Hardware representando o hardware do sistema
+        - app_interface (ApplicationInterface): objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+        """
+        
         self.refresh = Refresh()
         self.hardware = hardware
         self.app_interface = app_interface
 
+
     def DisplayMenu(self):
+        """
+        Mostra o menu de hardware do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         while True:
             self.refresh.Fresh()
             print("\nMenu de Hardware:")
@@ -56,13 +110,40 @@ class HardwareMenu:
 
 
 class MemoryMenu:
+    """
+    Classe que representa o menu de gerenciamento de memória do sistema.
+    
+    Atributos:
+    - hardware: objeto da classe Hardware representando o hardware do sistema
+    - app_interface: objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+
+    Métodos:
+    - DisplayMenu: mostra o menu de gerenciamento de memória do sistema
+    """
+    
     def __init__(self, hardware, app_interface):
+        """
+        Construtor da classe MemoryMenu.
+
+        Parâmetros:
+        - hardware (Hardware): objeto da classe Hardware representando o hardware do sistema
+        - app_interface (ApplicationInterface): objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+        """
+        
         self.refresh = Refresh()
         self.list = List()
         self.hardware = hardware
         self.app_interface = app_interface
 
+
     def DisplayMenu(self):
+        """
+        Mostra o menu de gerenciamento de memória do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+
         while True:
             self.refresh.Fresh()
             print("\nMenu de Gerenciamento de Memória:")
@@ -93,12 +174,36 @@ class MemoryMenu:
 
 
 class AppMenu:
+    """
+    Classe que representa o menu de aplicativos do sistema.
+
+    Atributos:
+    - app_interface: objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+    
+    Métodos:
+    - DisplayMenu: mostra o menu de aplicativos do sistema
+    """
+    
     def __init__(self, app_interface):
+        """
+        Construtor da classe AppMenu.
+
+        Parâmetros:
+        - app_interface (ApplicationInterface): objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+        """
+        
         self.refresh = Refresh()
         self.list = List()
         self.app_interface = app_interface
 
     def DisplayMenu(self):
+        """
+        Mostra o menu de aplicativos do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         while True:
             self.refresh.Fresh()
             print("\nMenu de Aplicativos:")
@@ -124,13 +229,39 @@ class AppMenu:
 
             else:
                 print("Opção inválida. Tente novamente.")
+
+
 class ConfigAppMenu:
+    """
+    Classe que representa o menu de configuração de aplicativos do sistema.
+
+    Atributos:
+    - app_interface: objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+
+    Métodos:
+    - DisplayMenu: mostra o menu de configuração de aplicativos do sistema
+    """
+    
     def __init__(self, app_interface):
+        """
+        Construtor da classe ConfigAppMenu.
+
+        Parâmetros:
+        - app_interface (ApplicationInterface): objeto da classe ApplicationInterface representando a interface de aplicativos do sistema
+        """
+        
         self.refresh = Refresh()
         self.list = List()
         self.app_interface = app_interface
 
     def DisplayMenu(self):
+        """
+        Mostra o menu de configuração de aplicativos do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         while True:
             self.refresh.Fresh()
             print("\nConfigurações de Aplicativos:")
@@ -201,11 +332,36 @@ class ConfigAppMenu:
                 print("Opção inválida. Tente novamente.")
 
 class RepositoryMenu:
+    """
+    Classe que representa o menu de repositórios do sistema.
+
+    Atributos:
+    - linuxOS: objeto da classe LinuxOperatingSystem representando o sistema operacional Linux
+
+    Métodos:
+    - DisplayMenu: mostra o menu de repositórios do sistema    
+    """
+
     def __init__(self, linuxOS):
+        """
+        Construtor da classe RepositoryMenu.
+
+        Parâmetros:
+        - linuxOS (LinuxOperatingSystem): objeto da classe LinuxOperatingSystem representando o sistema operacional Linux
+        """
+
         self.refresh = Refresh()
         self.repositories = linuxOS.repositories
 
+
     def DisplayMenu(self):
+        """
+        Mostra o menu de repositórios do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+
         while True:
             self.refresh.Fresh()
             print("\nMenu de Repositórios:")
@@ -242,11 +398,35 @@ class RepositoryMenu:
                 print("Opção inválida. Tente novamente.")
 
 class PackageMenu:
+    """
+    Classe que representa o menu de pacotes do sistema.
+
+    Atributos:
+    - reponame: objeto da classe Repository representando um repositório
+
+    Métodos:
+    - DisplayMenu: mostra o menu de pacotes do sistema
+    """
+    
     def __init__(self, reponame):
+        """
+        Construtor da classe PackageMenu.
+
+        Parâmetros:
+        - reponame (Repository): objeto da classe Repository representando um repositório
+        """
+        
         self.refresh = Refresh()
         self.reponame = reponame
 
     def DisplayMenu(self):
+        """
+        Mostra o menu de pacotes do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         while True:
             self.refresh.Fresh()
             print(f"\nMenu de Pacotes do repositório '{self.reponame.reponame}':")
@@ -306,9 +486,29 @@ class PackageMenu:
                 print("Opção inválida. Tente novamente.")
             
 
-
 class InfoMenu:
+    """
+    Classe que representa o menu de informações do sistema.
+
+    Atributos:
+    - hardware: objeto da classe Hardware representando o hardware do sistema
+    - server: objeto da classe Server representando o servidor do sistema
+    - architecture: objeto da classe SoftwareArchitecture representando a arquitetura de software do sistema
+
+    Métodos:
+    - DisplayMenu: mostra o menu de informações do sistema
+    """
+    
     def __init__(self, hardware, server, architecture):
+        """
+        Construtor da classe InfoMenu.
+
+        Parâmetros:
+        - hardware (Hardware): objeto da classe Hardware representando o hardware do sistema
+        - server (Server): objeto da classe Server representando o servidor do sistema
+        - architecture (SoftwareArchitecture): objeto da classe SoftwareArchitecture representando a arquitetura de software do sistema
+        """
+        
         self.refresh = Refresh()
         self.list = List()
         self.hardware = hardware
@@ -316,6 +516,13 @@ class InfoMenu:
         self.architecture = architecture
 
     def DisplayMenu(self):
+        """
+        Mostra o menu de informações do sistema.
+
+        Parâmetros:
+        - Nenhum.
+        """
+        
         while True:
             self.refresh.Fresh()
             print("\nMenu de Informações:")
@@ -336,3 +543,4 @@ class InfoMenu:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
+                
