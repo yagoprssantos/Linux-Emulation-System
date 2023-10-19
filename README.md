@@ -2,6 +2,8 @@
 
 ![Banner](banner.png)
 
+---
+
 ## Tabela de Conteúdos
 
 - [Descrição](#descrição)
@@ -25,7 +27,7 @@ Para instalar o simulador, você precisa ter o Python 3 instalado em seu sistema
 
 Depois de ter o Python instalado, você pode baixar o código-fonte do simulador do repositório do GitHub:
 
-`git clone https://github.com/your-username/your-project.git`
+`git clone https://github.com/yagoprssantos/Linux-System-Simulator.git`
 
 
 ## Uso
@@ -75,12 +77,6 @@ Isso iniciará o simulador e exibirá o menu principal. A partir do menu princip
 
 Se você deseja contribuir para o projeto, faça um fork do repositório e crie uma solicitação de pull. Certifique-se de seguir as convenções de codificação usadas no projeto e escrever testes para qualquer nova funcionalidade.
 
-
-## Agradecimentos e Link para o GitHub
-
-Agradeço por explorar este simulador do sistema operacional Linux!
-Para acessar o código fonte deste projeto e contribuir, visite nosso repositório no GitHub:
-[Link para o Repositório do GitHub](https://github.com/your-username/your-project)
 
 ---
 
