@@ -60,7 +60,7 @@ class LinuxOperatingSystem:
         for i in range(len(repo_data)):
             repo_name, repo_url = repo_data[i]
             repo = Repository(repo_name, repo_url)
-            for _ in range(5):
+            for _ in range(3):
                 pack_name = f"Package-{random.randint(1, 100)}"
                 pack_version = round(random.uniform(1.0, 12.0), 1)
                 repo.repo_pack_list.append(Package(repo_name, repo_url, pack_name, pack_version))

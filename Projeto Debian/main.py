@@ -40,7 +40,6 @@ class Output:
         self.server.AddMachine(self.machine)
         
 
-        #Inicialização dos menus
         while True:
             choice = MainMenu().DisplayMenu()
             if choice == 1:
@@ -57,5 +56,7 @@ class Output:
                 self.linuxOS.ShutdownSystem()
                 break
 
+
 if __name__ == "__main__":
     Output().Run()
+
