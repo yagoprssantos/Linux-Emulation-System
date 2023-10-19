@@ -2,7 +2,48 @@ from loading import *
 from menus import *
 from list import *
 
+
 """
+Este código representa um simulador interativo de um ambiente do sistema operacional Linux.
+Ele oferece funcionalidades simuladas relacionadas a hardware, aplicativos, repositórios,
+servidores e informações gerais do sistema, permitindo que o usuário explore e interaja
+com diferentes aspectos desse sistema operacional fictício.
+
+No início do código, é possível perceber que todas as variáveis e objetos são inicializados
+e instanciados. Isso é feito para que o usuário possa interagir com o sistema operacional
+de forma mais dinâmica, sem a necessidade de criar e instanciar objetos a cada interação.
+Caso deseja alterar algo, altere os valores das variáveis e objetos nessas instâncias.
+
+Neste projeto, você pode encontrar:
+
+- Análise de Hardware: É possível visualizar informações de hardware, como tipo, modelo,
+processador, memória RAM e armazenamento.
+
+- Simulação de Aplicativos:  instalação e remoção de aplicativos em um sistema
+operacional, além de funcionalidades como iniciar e encerrar aplicativos, e visualizar
+informações de aplicativos.
+
+- Gerenciamento de Pacotes: Simulação de um sistema de repositório de software com a capacidade
+de instalar e remover pacotes de software individualmente.
+
+- Servidores: Experimente um servidor web com a capacidade de adicionar e remover máquinas
+virtuais, além de visualizar informações de máquinas virtuais.
+
+- Informações do Sistema: Acesse informações gerais do sistema operacional, como versão do
+kernel, arquitetura de software e informações de hardware, que podem ser úteis para
+desenvolvedores e usuários.
+
+Curiosidades do projeto:
+- Este projeto utiliza conceitos de programação orientada a objetos para modelar o ambiente simulado
+do sistema operacional Linux, como classes, objetos, herança, polimorfismo e encapsulamento.
+- As funcionalidades são simuladas e não realizam operações reais do sistema, proporcionando uma
+experiência de usuário fictícia, ou seja, não é possível instalar aplicativos reais ou acessar]
+repositórios reais. Então não se preocupe, você não irá quebrar nada!
+
+Agradeço por ler até aqui e explorar este simulador interativo de sistema operacional! 
+
+Para acessar o código fonte deste projeto, visite o repositório no GitHub:
+[https://github.com/yagoprssantos/Linux-System-Simulator]
 
 """
 

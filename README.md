@@ -1,4 +1,4 @@
-# Sistema de Emulação Linux
+# Simulador do Sistema Operacional Linux
 
 ![Banner](banner.png)
 
@@ -8,20 +8,38 @@
 - [Instalação](#instalação)
 - [Uso](#uso)
 - [Funcionalidades](#funcionalidades)
-- [Começando](#começando)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Contribuindo](#contribuindo)
-- [Licença](#licença)
-- [Agradecimentos](#agradecimentos)
 
-## Introdução
 
-O Sistema de Emulação Linux é uma ferramenta educacional abrangente que emula um ambiente Linux simplificado. Ele fornece aos usuários uma experiência prática em trabalhar com componentes de hardware, software e rede em um ambiente simulado e controlado.
+## Descrição
 
-Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesmente curioso sobre como o Linux funciona, este sistema de emulação oferece uma maneira segura de explorar e experimentar vários aspectos de um sistema Linux.
+O Simulador do Sistema Operacional Linux é uma ferramenta educacional abrangente que simula um ambiente Linux simplificado. Ele fornece aos usuários uma experiência prática em trabalhar com componentes de hardware, software e rede em um ambiente simulado e controlado.
+
+Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesmente curioso sobre como o Linux funciona, este simulador oferece uma maneira segura de explorar e experimentar vários aspectos de um sistema Linux.
+
+
+## Instalação
+
+Para instalar o simulador, você precisa ter o Python 3 instalado em seu sistema. Você pode baixar o Python no site oficial: https://www.python.org/downloads/
+
+Depois de ter o Python instalado, você pode baixar o código-fonte do simulador do repositório do GitHub:
+
+`git clone https://github.com/your-username/your-project.git`
+
+
+## Uso
+
+Para executar o simulador, navegue até o diretório onde você baixou o código-fonte e execute o seguinte comando: 
+
+`python main.py`
+
+Isso iniciará o simulador e exibirá o menu principal. A partir do menu principal, você pode escolher visualizar informações sobre o hardware, o servidor, a arquitetura de software ou os aplicativos instalados. Você também pode configurar os aplicativos instalados, instalando, desinstalando, iniciando, parando ou gerenciando permissões para eles.
+
 
 ## Funcionalidades
 
-- **Emulação de Hardware**: Experimente as funcionalidades de uma máquina virtual com componentes como CPU, memória e armazenamento.
+- **Simulação de Hardware**: Experimente as funcionalidades de uma máquina virtual com componentes como CPU, memória e armazenamento.
 
 - **Componentes de Software**: Interaja com um sistema operacional semelhante ao Linux, incluindo kernel e arquitetura de software.
 
@@ -29,9 +47,10 @@ Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesme
 
 - **Interface Amigável**: Utilize uma interface intuitiva baseada em menus que torna o sistema acessível a usuários de todos os níveis.
 
+
 ## Estrutura do Projeto
 
-- **main.py**: O ponto de entrada principal para iniciar o sistema de emulação.
+- **main.py**: O ponto de entrada principal para iniciar o simulador do sistema operacional.
 
 - **loading.py**: Módulo contendo funções para animações de carregamento.
 
@@ -43,7 +62,7 @@ Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesme
 
 - **kernel.py**: Define a `LinuxKernelAPI` para interações do kernel.
 
-- **appInterface.py**: Fornece uma emulação da interface e gerenciamento de aplicativos.
+- **appInterface.py**: Fornece uma simulação da interface e gerenciamento de aplicativos.
 
 - **package.py**: Define a classe `Package` para pacotes de software no sistema.
 
@@ -51,27 +70,18 @@ Se você é um aspirante a administrador de sistemas, desenvolvedor ou simplesme
 
 - **server.py**: Representa um servidor para simulações de rede.
 
-## Uso
-
-1. Clone o repositório: `git clone https://github.com/your-username/your-project.git`
-2. Navegue até o diretório do projeto: `cd your-project`
-3. Execute `main.py` para iniciar o sistema de emulação.
-4. Use a interface baseada em menus para interagir com a simulação.
-
-## Notas Adicionais
-
-- Este sistema de emulação destina-se apenas a fins educacionais e de demonstração.
-- Observe que este é um ambiente simulado e não adequado para uso no mundo real.
 
 ## Contribuindo
 
-Contribuições são bem-vindas! Se você deseja melhorar o projeto, faça um fork do repositório e crie uma solicitação de pull. Você também pode abrir problemas para relatórios de bugs ou solicitações de recursos.
+Se você deseja contribuir para o projeto, faça um fork do repositório e crie uma solicitação de pull. Certifique-se de seguir as convenções de codificação usadas no projeto e escrever testes para qualquer nova funcionalidade.
 
-## Autor
 
-- [Yago Santos](https://github.com/yagoprssantos)
+## Agradecimentos e Link para o GitHub
 
+Agradeço por explorar este simulador do sistema operacional Linux!
+Para acessar o código fonte deste projeto e contribuir, visite nosso repositório no GitHub:
+[Link para o Repositório do GitHub](https://github.com/your-username/your-project)
 
 ---
 
-**Aproveite sua jornada de emulação Linux!**
+**Aproveite sua jornada de simulação do Linux!**
